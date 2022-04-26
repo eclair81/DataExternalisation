@@ -1,0 +1,77 @@
+
+{
+	"stageList":
+	[
+		"stage1",
+		"stage2",
+		"stage3"
+	],
+
+
+	"colorToElem":
+	[
+		{
+			"r"   : 0,
+			"v"   : 0,
+			"b"   : 0,
+			"src" : "",
+			"type": "spawnPoint"
+		},
+		{
+			"r"   : 100,
+			"v"   : 100,
+			"b"   : 100,
+			"src" : "flag",
+			"type": "checkPoint"
+		},
+		{
+			"r"   : 0,
+			"v"   : 255,
+			"b"   : 0,
+			"src" : "grass",
+			"type": "bloc"
+		},
+		{
+			"r"   : 180,
+			"v"   : 130,
+			"b"   : 50,
+			"src" : "dirt",
+			"type": "bloc"
+		},
+		{
+			"r"   : 0,
+			"v"   : 255,
+			"b"   : 0,
+			"src" : "brick",
+			"type": "bloc"
+		},
+		{
+			"r"   : 255,
+			"v"   : 235,
+			"b"   : 4,
+			"src" : "coin",
+			"type": "collectible"
+		},
+		{
+			"r"   : 255,
+			"v"   : 0,
+			"b"   : 0,
+			"src" : "enemie",
+			"type": "enemi1"
+		},
+		{
+			"r"   : 220,
+			"v"   : 90,
+			"b"   : 90,
+			"src" : "enemi2",
+			"type": "enemi2"
+		},
+		{
+			"r"   : 200,
+			"v"   : 0,
+			"b"   : 0,
+			"src" : "enemi3",
+			"type": "enemi3"
+		}
+	]
+}

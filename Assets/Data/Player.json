@@ -1,0 +1,7 @@
+
+{
+	"life"		 : 3,
+	"speed"      : 5,
+	"jumpHeight" : 3,
+	"spriteSheet": "PlayerSheet"
+}
