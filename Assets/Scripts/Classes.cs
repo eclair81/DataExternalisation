@@ -11,15 +11,10 @@ public class Player
 public class Stages
 {
     public string[] stageList;
-}
-
-
-
-public class ColorToElem
-{
     public Elem[] colorToElem;
 }
 
+[System.Serializable]
 public class Elem
 {
     public int r;
