@@ -2,9 +2,9 @@
 {
 	"stageList":
 	[
-		"stage1",
-		"stage2",
-		"stage3"
+		"Stages/stage1",
+		"Stages/stage2",
+		"Stages/stage3"
 	],
 
 
