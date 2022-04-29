@@ -11,7 +11,7 @@ public class Player
 public class Stages
 {
     public string[] stageList;
-    public Elem[] colorToElem;
+    public Elem[] colorMapping;
 }
 
 [System.Serializable]

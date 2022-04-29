@@ -8,9 +8,9 @@ public class LevelGenerator : MonoBehaviour
 
     void Start()
     {
-        elems = JsonReader.Instance.stages.colorToElem;
+        elems = JsonReader.Instance.stages.colorMapping;
         //Test, print all the pixel of stage1
-        //GenerateLevel(JsonReader.Instance.maps[0]);
+        GenerateLevel(JsonReader.Instance.maps[0]);
     }
 
     public void GenerateLevel(Texture2D map)
