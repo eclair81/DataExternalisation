@@ -17,9 +17,9 @@ public class Stages
 [System.Serializable]
 public class Elem
 {
-    public int r;
-    public int v;
-    public int b;
+    public string nom;
+    public int[] rvb;
     public string src;
+    public int[] info;
     public string type;
 }
