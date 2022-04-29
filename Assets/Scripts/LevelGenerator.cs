@@ -5,10 +5,12 @@ using UnityEngine;
 public class LevelGenerator : MonoBehaviour
 {
     private Elem[] elems;
+    private int threshold;
 
     void Start()
     {
         elems = JsonReader.Instance.stages.colorMapping;
+        threshold = JsonReader.Instance.stages.colorFidelity;
         //Test, print all the pixel of stage1
         GenerateLevel(JsonReader.Instance.maps[0]);
     }
@@ -34,5 +36,17 @@ public class LevelGenerator : MonoBehaviour
             return;
         }
         Debug.Log(pixel);
+    }
+
+
+    // takes two colors: one int[3](0-255) -> rgb and one Unity type of color (rgba)(0f-1f)
+    // return true if the two colors are close enought to each other
+    // how close is determined by a threshold
+    private bool ColorsAreClose(int[] rvb, Color c/*, int threshold = 10*/)
+    {
+        float  r = rvb[0] - (c.r * 255),
+            g = rvb[1] - (c.g * 255),
+            b = rvb[2] - (c.b * 255);
+        return (r*r + g*g + b*b) <= threshold*threshold;
     }
 }

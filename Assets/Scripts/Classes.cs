@@ -11,6 +11,7 @@ public class Player
 public class Stages
 {
     public string[] stageList;
+    public int colorFidelity;
     public Elem[] colorMapping;
 }
 
