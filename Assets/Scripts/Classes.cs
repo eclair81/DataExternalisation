@@ -22,5 +22,6 @@ public class Elem
     public int[] rvb;
     public string[] src;
     public int[][] info;
+    public int[] dim;
     public string type;
 }

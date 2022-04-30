@@ -20,6 +20,7 @@
 			"nom" : "flag",
 			"rvb" : [204, 204, 204],
 			"src" : ["Sprites/Tiles/flag"],
+			"dim" : [32, 32],
 			"type": "checkPoint"
 		},
 		{
@@ -27,6 +28,7 @@
 			"rvb" : [0, 204, 0],
 			"src" : ["Sprites/Tiles/tileset_32x32(new)"],
 			"info": [[0, 0, 3]],
+			"dim" : [32, 32],
 			"type": "bloc"
 		},
 		{
@@ -34,36 +36,42 @@
 			"rvb" : [255, 128, 0],
 			"src" : ["Sprites/Tiles/tileset_32x32(new)"],
 			"info": [[1, 1, 1]],
+			"dim" : [32, 32],
 			"type": "bloc"
 		},
 		{
 			"nom" : "brick",
 			"rvb" : [80, 65, 10],
 			"src" : ["Sprites/Tiles/brick"],
+			"dim" : [32, 32],
 			"type": "bloc"
 		},
 		{
 			"nom" : "coin",
 			"rvb" : [255, 235, 4],
 			"src" : ["Sprites/Tiles/coin_anim_strip_6", "Sprites/Tiles/coin_pickup_anim_strip_6"],
+			"dim" : [8, 8],
 			"type": "collectible"
 		},
 		{
 			"nom" : "foe",
 			"rvb" : [255, 0, 0],
 			"src" : ["Sprites/Foes/foe"],
+			"dim" : [32, 32],
 			"type": "foe1"
 		},
 		{
 			"nom" : "foe2",
 			"rvb" : [220, 90, 90],
 			"src" : ["Sprites/Foes/foe2"],
+			"dim" : [32, 32],
 			"type": "foe2"
 		},
 		{
 			"nom" : "foe3",
 			"rvb" : [200, 0, 0],
 			"src" : ["Sprites/Foes/foe3"],
+			"dim" : [32, 32],
 			"type": "foe3"
 		}
 	]
