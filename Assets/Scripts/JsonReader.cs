@@ -15,6 +15,7 @@ public class JsonReader : MonoBehaviour
     public Player player;
     public Stages stages;
     public Texture2D[] maps;
+    public Dictionary<int[], List<Sprite[]>> dicoMapping;
 
     void Awake()
     {
@@ -34,7 +35,48 @@ public class JsonReader : MonoBehaviour
             maps[i] = map;
         }
 
-        
+        // Creating dictionary
+        dicoMapping = new Dictionary<int[], List<Sprite[]>>();
+        foreach (Elem elem in stages.colorMapping)
+        {
+            //Debug.Log(elem.nom);
+
+            if(elem.src != null)
+            {
+                //Texture2D[] textures = new Texture2D[elem.src.Length];
+                List<Sprite[]> allSprites = new List<Sprite[]>();
+                for(int i = 0; i < elem.src.Length; i++)
+                {
+
+                    Texture2D texture;
+                    try {
+                        texture = duplicateTexture(Resources.Load<Texture2D>(elem.src[i]));
+                    } catch {
+                        Debug.Log("There is no texture for " + elem.src[i]);
+                        //Add empty spritesheet
+                        allSprites.Add(new Sprite[0]);
+                        //skip to next
+                        continue;
+                    }
+
+                    Sprite[] sheet;
+                    if(elem.info != null)
+                    {
+                        sheet = SpriteSheetCreator.ExtractSpriteSheet(texture, elem.dim[0], elem.dim[1], elem.info[i][0], elem.info[i][1], elem.info[i][2]);
+                    }
+                    else
+                    {
+                        //Debug.Log("Trying to transform a full texture (" + elem.src[i] +") in sprite[] of " + elem.dim[0] + " * " + elem.dim[1] + " pixels...");
+                        sheet = SpriteSheetCreator.CreateSpriteSheet(texture, elem.dim[0], elem.dim[1]);
+                    }
+
+                    allSprites.Add(sheet);
+                }
+
+                dicoMapping.Add(elem.rvb, allSprites);
+            }
+        }
+
     }
 
 

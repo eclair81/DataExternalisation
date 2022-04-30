@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
-    private Elem[] elems;
+    //private Elem[] colorMapping;
     private int threshold;
+    private Dictionary<int[], List<Sprite[]>> dicoMapping;
+    
 
     void Start()
     {
-        elems = JsonReader.Instance.stages.colorMapping;
+        //colorMapping = JsonReader.Instance.stages.colorMapping;
         threshold = JsonReader.Instance.stages.colorFidelity;
+        dicoMapping = JsonReader.Instance.dicoMapping;
+        
+
         //Test, print all the pixel of stage1
-        GenerateLevel(JsonReader.Instance.maps[0]);
+        //GenerateLevel(JsonReader.Instance.maps[0]);
     }
 
     public void GenerateLevel(Texture2D map)
