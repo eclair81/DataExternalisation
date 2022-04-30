@@ -4,12 +4,12 @@ using UnityEngine;
 
 public static class SpriteSheetCreator : object
 {
-    public static int width = 32;
-    public static int height = 32;
+    //public static int width = 32;
+    //public static int height = 32;
 
     // return an array of (width * height) sprites 
     // all the sprites in fullSheet have to be in line
-    public static Sprite[] CreateSpriteSheet(Texture2D fullSheet)
+    public static Sprite[] CreateSpriteSheet(Texture2D fullSheet, int width, int height)
     {
         int nbSprites = (int)(fullSheet.width / width);
         Sprite[] spriteSheet = new Sprite[nbSprites];
@@ -31,7 +31,7 @@ public static class SpriteSheetCreator : object
     // cooX / cooY -> coordinates of the first sprite to extract in the sheet (ex: 2nd sprite on the 3rd row -> cooX = 2 and cooY = 3)
     // number -> number of Sprites to extract (must be positive)
     // /!\ fullSheet should not contain empty spots where sprites are being extracted
-    public static Sprite[] ExtractSpriteSheet(Texture2D fullSheet, int cooX, int cooY, int number)
+    public static Sprite[] ExtractSpriteSheet(Texture2D fullSheet, int width, int height, int cooX, int cooY, int number)
     {
         Sprite[] spriteSheet = new Sprite[number];
         int currentNumberExtracted = 0;
@@ -42,7 +42,7 @@ public static class SpriteSheetCreator : object
         {
             Sprite newSprite = Sprite.Create(
                 fullSheet,
-                new Rect(x * width, 1 * height, width, height),
+                new Rect(x * width, y * height, width, height),
                 new Vector2(width / 2, height / 2) // -> pivot point (center)
             );
 
