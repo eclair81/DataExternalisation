@@ -19,51 +19,51 @@
 		{
 			"nom" : "flag",
 			"rvb" : [204, 204, 204],
-			"src" : "Sprites/Tiles/flag",
+			"src" : ["Sprites/Tiles/flag"],
 			"type": "checkPoint"
 		},
 		{
 			"nom" : "grass",
 			"rvb" : [0, 204, 0],
-			"src" : "Sprites/Tiles/tileset_32x32(new)",
-			"info": [0, 0, 3],
+			"src" : ["Sprites/Tiles/tileset_32x32(new)"],
+			"info": [[0, 0, 3]],
 			"type": "bloc"
 		},
 		{
 			"nom" : "dirt",
 			"rvb" : [255, 128, 0],
-			"src" : "Sprites/Tiles/tileset_32x32(new)",
-			"info": [1, 1, 1],
+			"src" : ["Sprites/Tiles/tileset_32x32(new)"],
+			"info": [[1, 1, 1]],
 			"type": "bloc"
 		},
 		{
 			"nom" : "brick",
 			"rvb" : [80, 65, 10],
-			"src" : "Sprites/Tiles/brick",
+			"src" : ["Sprites/Tiles/brick"],
 			"type": "bloc"
 		},
 		{
 			"nom" : "coin",
 			"rvb" : [255, 235, 4],
-			"src" : "Sprites/Tiles/coin",
+			"src" : ["Sprites/Tiles/coin_anim_strip_6", "Sprites/Tiles/coin_pickup_anim_strip_6"],
 			"type": "collectible"
 		},
 		{
 			"nom" : "foe",
 			"rvb" : [255, 0, 0],
-			"src" : "Sprites/Foes/foe",
+			"src" : ["Sprites/Foes/foe"],
 			"type": "foe1"
 		},
 		{
 			"nom" : "foe2",
 			"rvb" : [220, 90, 90],
-			"src" : "Sprites/Foes/foe2",
+			"src" : ["Sprites/Foes/foe2"],
 			"type": "foe2"
 		},
 		{
 			"nom" : "foe3",
 			"rvb" : [200, 0, 0],
-			"src" : "Sprites/Foes/foe3",
+			"src" : ["Sprites/Foes/foe3"],
 			"type": "foe3"
 		}
 	]
