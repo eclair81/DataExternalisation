@@ -18,7 +18,7 @@ public static class SpriteSheetCreator : object
         {
             Sprite newSprite = Sprite.Create(
                 fullSheet,
-                new Rect(x * width, 1 * height, width, height),
+                new Rect(x * width, 0, width, height),
                 new Vector2(width / 2, height / 2) // -> pivot point (center)
             );
  
