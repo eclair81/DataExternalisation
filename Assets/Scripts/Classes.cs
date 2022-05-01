@@ -1,3 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 public class Player
 {
     public int life;
@@ -24,4 +28,17 @@ public class Elem
     public int[][] info;
     public int[] dim;
     public string type;
+}
+
+
+public class ElemDico
+{
+    public string type;
+    public List<Sprite[]> sheets;
+
+    public ElemDico(string t, List<Sprite[]> l)
+    {
+        type = t;
+        sheets = l;
+    }
 }

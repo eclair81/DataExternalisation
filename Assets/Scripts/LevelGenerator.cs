@@ -6,7 +6,7 @@ public class LevelGenerator : MonoBehaviour
 {
     //private Elem[] colorMapping;
     private int threshold;
-    private Dictionary<int[], List<Sprite[]>> dicoMapping;
+    private Dictionary<int[], ElemDico> dicoMapping;
     
 
     void Start()

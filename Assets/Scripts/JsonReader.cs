@@ -15,7 +15,7 @@ public class JsonReader : MonoBehaviour
     public Player player;
     public Stages stages;
     public Texture2D[] maps;
-    public Dictionary<int[], List<Sprite[]>> dicoMapping;
+    public Dictionary<int[], ElemDico> dicoMapping;
 
     void Awake()
     {
@@ -36,7 +36,7 @@ public class JsonReader : MonoBehaviour
         }
 
         // Creating dictionary
-        dicoMapping = new Dictionary<int[], List<Sprite[]>>();
+        dicoMapping = new Dictionary<int[], ElemDico>();
         foreach (Elem elem in stages.colorMapping)
         {
             //Debug.Log(elem.nom);
@@ -52,7 +52,7 @@ public class JsonReader : MonoBehaviour
                     try {
                         texture = duplicateTexture(Resources.Load<Texture2D>(elem.src[i]));
                     } catch {
-                        Debug.Log("There is no texture for " + elem.src[i]);
+                        //Debug.Log("There is no texture for " + elem.src[i]);
                         //Add empty spritesheet
                         allSprites.Add(new Sprite[0]);
                         //skip to next
@@ -73,7 +73,14 @@ public class JsonReader : MonoBehaviour
                     allSprites.Add(sheet);
                 }
 
-                dicoMapping.Add(elem.rvb, allSprites);
+                ElemDico elemDico = new ElemDico(elem.type, allSprites);
+                dicoMapping.Add(elem.rvb, elemDico);
+            }
+            else
+            {
+                // if there is no sprites for that element (spawnpoint), we still add it into the dictionary, but with an empty list of Sprite[]
+                ElemDico elemDico = new ElemDico(elem.type, new List<Sprite[]>());
+                dicoMapping.Add(elem.rvb, elemDico);
             }
         }
 
