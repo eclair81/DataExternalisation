@@ -60,9 +60,20 @@ public class JsonReader : MonoBehaviour
                     }
 
                     Sprite[] sheet;
+                    /*
+                    string res = "[";
+                    foreach (int nb in elem.info)
+                    {
+                        res += nb.ToString() + ", ";
+                    }
+                    res += "]";
+                    Debug.Log(elem.nom + " a pour info: " + res);
+                    */
                     if(elem.info != null)
                     {
-                        sheet = SpriteSheetCreator.ExtractSpriteSheet(texture, elem.dim[0], elem.dim[1], elem.info[i][0], elem.info[i][1], elem.info[i][2]);
+                        //Debug.Log("Starting Extraction");
+                        sheet = SpriteSheetCreator.ExtractSpriteSheet(texture, elem.dim[0], elem.dim[1], elem.info[i*3], elem.info[i*3 + 1], elem.info[i*3 + 2]);
+                        //Debug.Log("Ending Extraction, number of sprites in sheet: " + sheet.Length);
                     }
                     else
                     {
@@ -75,6 +86,7 @@ public class JsonReader : MonoBehaviour
 
                 ElemDico elemDico = new ElemDico(elem.type, allSprites);
                 dicoMapping.Add(elem.rvb, elemDico);
+                Debug.Log("Added into dictionary: " + elem.nom + " [" + elem.rvb[0] + ", " + elem.rvb[1] + ", " + elem.rvb[2] + "] \n It contains " + elemDico.sheets.Count + "spriteSheets \n the first spriteSheet has " + elemDico.sheets[0].Length + " sprites in it");
             }
             else
             {
