@@ -27,7 +27,7 @@
 			"nom" : "grass",
 			"rvb" : [0, 204, 0],
 			"src" : ["Sprites/Tiles/tileset_32x32(new)"],
-			"info": [[0, 0, 3]],
+			"info": [0, 0, 3],
 			"dim" : [32, 32],
 			"type": "bloc"
 		},
@@ -35,7 +35,7 @@
 			"nom" : "dirt",
 			"rvb" : [255, 128, 0],
 			"src" : ["Sprites/Tiles/tileset_32x32(new)"],
-			"info": [[1, 1, 1]],
+			"info": [1, 1, 1],
 			"dim" : [32, 32],
 			"type": "bloc"
 		},
