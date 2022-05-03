@@ -51,6 +51,7 @@ public class JsonReader : MonoBehaviour
                     Texture2D texture;
                     try {
                         texture = duplicateTexture(Resources.Load<Texture2D>(elem.src[i]));
+                        texture.name = elem.src[i];
                     } catch {
                         //Debug.Log("There is no texture for " + elem.src[i]);
                         //Add empty spritesheet
@@ -86,7 +87,7 @@ public class JsonReader : MonoBehaviour
 
                 ElemDico elemDico = new ElemDico(elem.type, allSprites);
                 dicoMapping.Add(elem.rvb, elemDico);
-                Debug.Log("Added into dictionary: " + elem.nom + " [" + elem.rvb[0] + ", " + elem.rvb[1] + ", " + elem.rvb[2] + "] \n It contains " + elemDico.sheets.Count + "spriteSheets \n the first spriteSheet has " + elemDico.sheets[0].Length + " sprites in it");
+                //Debug.Log("Added into dictionary: " + elem.nom + " [" + elem.rvb[0] + ", " + elem.rvb[1] + ", " + elem.rvb[2] + "] \n It contains " + elemDico.sheets.Count + "spriteSheets \n the first spriteSheet has " + elemDico.sheets[0].Length + " sprites in it");
             }
             else
             {
