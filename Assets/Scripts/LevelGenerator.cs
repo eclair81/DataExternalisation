@@ -8,6 +8,8 @@ public class LevelGenerator : MonoBehaviour
     private int threshold;
     private Dictionary<int[], ElemDico> dicoMapping;
     
+    [Header("Prefabs")]
+    public GameObject blocPrefab;
 
     void Start()
     {
@@ -17,7 +19,7 @@ public class LevelGenerator : MonoBehaviour
         
 
         //Test, print all the pixel of stage1
-        //GenerateLevel(JsonReader.Instance.maps[0]);
+        GenerateLevel(JsonReader.Instance.maps[0]);
     }
 
     public void GenerateLevel(Texture2D map)
@@ -41,6 +43,29 @@ public class LevelGenerator : MonoBehaviour
             return;
         }
         Debug.Log(pixel);
+
+        foreach (KeyValuePair<int[], ElemDico> entry in dicoMapping)
+        {
+            if(ColorsAreClose(entry.Key, pixel))
+            {
+                //Debug.Log("Is this a bloc? " + entry.Value.type == "bloc");
+                if(entry.Value.type == "bloc")
+                {
+                    //Debug.Log("It's a match!");
+                    //Debug.Log("match between: [" + entry.Key[0] + ", " + entry.Key[1] + ", " + entry.Key[2] + "] and " + pixel);
+                    GameObject bloc = Instantiate(blocPrefab, new Vector2(x, y), Quaternion.identity);
+                    Bloc blocScript = bloc.GetComponent<Bloc>();
+                    //Debug.Log("sheets value: " + entry.Value.sheets);
+                    //Debug.Log("First sprite: " + entry.Value.sheets[0][0]);
+                    //Debug.Log("sprite size: " + entry.Value.sheets[0][0].rect);
+                    //printSprite(entry.Value.sheets[0][0]);
+                    blocScript.sheets = entry.Value.sheets;
+                    blocScript.Go();
+                    // don't look the remaining entries
+                    break;
+                }
+            }
+        }
     }
 
 
@@ -53,5 +78,21 @@ public class LevelGenerator : MonoBehaviour
             g = rvb[1] - (c.g * 255),
             b = rvb[2] - (c.b * 255);
         return (r*r + g*g + b*b) <= threshold*threshold;
+    }
+
+
+    //Just a function to see if a sprite is correctly set by printing all of it's pixels;
+    private void printSprite(Sprite sprite)
+    {
+        Texture2D text = sprite.texture;
+        Debug.Log("Texture name: " + text.name);
+        for (int x = 0; x < text.width; x++)
+        {
+            for (int y = 0; y < text.height; y++)
+            {
+                Color pixel = text.GetPixel(x, y);
+                Debug.Log(pixel);
+            }
+        }
     }
 }
