@@ -19,7 +19,7 @@ public static class SpriteSheetCreator : object
             Sprite newSprite = Sprite.Create(
                 fullSheet,
                 new Rect(x * width, 0, width, height),
-                new Vector2(width / 2, height / 2), // -> pivot point (center)
+                new Vector2(0.5f, 0.5f), // -> pivot point (center)
                 (float) width
             );
  
@@ -44,7 +44,7 @@ public static class SpriteSheetCreator : object
             Sprite newSprite = Sprite.Create(
                 fullSheet,
                 new Rect(x * width, y * height, width, height),
-                new Vector2(width / 2, height / 2) // -> pivot point (center)
+                new Vector2(0.5f, 0.5f) // -> pivot point (center)
             );
 
             spriteSheet[currentNumberExtracted] = newSprite;
