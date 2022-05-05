@@ -10,6 +10,7 @@ public class LevelGenerator : MonoBehaviour
     
     [Header("Prefabs")]
     public GameObject blocPrefab;
+    public GameObject collectiblePrefab;
 
     void Start()
     {
@@ -48,15 +49,58 @@ public class LevelGenerator : MonoBehaviour
         {
             if(ColorsAreClose(entry.Key, pixel))
             {
+
+                switch (entry.Value.type)
+                {
+                    case "spawnPoint":
+                        //things to do
+                        return;
+
+                    case "checkPoint":
+                        //things to do
+                        return;
+
+                    case "bloc":
+                        GameObject bloc = Instantiate(blocPrefab, new Vector2(x, y), Quaternion.identity);
+                        Bloc blocScript = bloc.GetComponent<Bloc>();
+                        blocScript.Go(entry.Value.sheets, entry.Value.dim);
+                        
+                        return;
+
+                    case "collectible":
+                        GameObject coin = Instantiate(collectiblePrefab, new Vector2(x, y), Quaternion.identity);
+                        Collectible coinScript = coin.GetComponent<Collectible>();
+                        coinScript.Go(entry.Value.sheets, entry.Value.animDelay);
+
+                        return;
+
+                    case "foe1":
+                        //things to do
+                        return;
+
+                    case "foe2":
+                        //things to do
+                        return;
+
+                    case "foe3":
+                        //things to do
+                        return;
+
+                    default:
+                        Debug.Log("Incorrect type (" + entry.Value.type +") for [" + entry.Key[0] + ", " + entry.Key[1] + ", " + entry.Key[2] + "]");
+                        return;
+                }
+
+
                 //Debug.Log("Is this a bloc? " + entry.Value.type == "bloc");
-                if(entry.Value.type == "bloc")
+                /*if(entry.Value.type == "bloc")
                 {
                     GameObject bloc = Instantiate(blocPrefab, new Vector2(x, y), Quaternion.identity);
                     Bloc blocScript = bloc.GetComponent<Bloc>();
                     blocScript.Go(entry.Value.sheets, entry.Value.dim);
                     // don't look the remaining entries
                     break;
-                }
+                }*/
             }
         }
     }

@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blocPrefab: {fileID: 3646997829444751366, guid: 2ac96ec254e683f4a8bd3dc1145f76fa, type: 3}
+  collectiblePrefab: {fileID: 4530682547818239594, guid: 8caf8a6c84bb4264b8f45cf9cee7890d, type: 3}
 --- !u!4 &361186730
 Transform:
   m_ObjectHideFlags: 0
