@@ -35,10 +35,12 @@ public class ElemDico
 {
     public string type;
     public List<Sprite[]> sheets;
+    public int[] dim;
 
-    public ElemDico(string t, List<Sprite[]> l)
+    public ElemDico(string t, List<Sprite[]> l, int[] d)
     {
         type = t;
         sheets = l;
+        dim = d;
     }
 }
