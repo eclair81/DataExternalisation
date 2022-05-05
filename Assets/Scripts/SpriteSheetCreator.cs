@@ -37,7 +37,8 @@ public static class SpriteSheetCreator : object
         Sprite[] spriteSheet = new Sprite[number];
         int currentNumberExtracted = 0;
         int x = cooX;
-        int y = cooY;
+        //int y = cooY;
+        int y = ((int)fullSheet.height / height) - cooY - 1; // 0, 0 is bottom left, not top left, -1 correction
 
         while (currentNumberExtracted != number)
         {
@@ -54,7 +55,8 @@ public static class SpriteSheetCreator : object
             x = (x + 1) % ((int)(fullSheet.width / width));
             if(x == 0) // changing row
             {
-                y++;
+                //y++;
+                y--;
             }
 
             currentNumberExtracted++;
