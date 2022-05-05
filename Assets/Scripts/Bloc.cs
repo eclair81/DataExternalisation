@@ -19,6 +19,9 @@ public class Bloc : MonoBehaviour
         //Add boxCollider
         BoxCollider2D boxCollider = gameObject.AddComponent<BoxCollider2D>();
 
+        //Set Ground Layer
+        gameObject.layer = LayerMask.NameToLayer("Ground");
+
         changeLocalScale(d);
     }
 
@@ -26,6 +29,7 @@ public class Bloc : MonoBehaviour
     {
         transform.localScale = new Vector3(100f / d[0], 100f / d[1], 1f);
     }
+    
 
     // Update is called once per frame
     /*void Update()
