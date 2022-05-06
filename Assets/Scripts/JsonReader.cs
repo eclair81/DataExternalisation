@@ -85,13 +85,13 @@ public class JsonReader : MonoBehaviour
                     allSprites.Add(sheet);
                 }
 
-                ElemDico elemDico = new ElemDico(elem.type, allSprites, elem.dim, elem.animDelay);
+                ElemDico elemDico = new ElemDico(elem.type, allSprites, elem.dim, elem.scale, elem.animDelay);
                 dicoMapping.Add(elem.rvb, elemDico);
             }
             else
             {
                 // if there is no sprites for that element (spawnpoint), we still add it into the dictionary, but with an empty list of Sprite[]
-                ElemDico elemDico = new ElemDico(elem.type, new List<Sprite[]>(), new int[2]{0, 0}, 0);
+                ElemDico elemDico = new ElemDico(elem.type, new List<Sprite[]>(), new int[2]{0, 0}, new float[2]{0, 0}, 0);
                 dicoMapping.Add(elem.rvb, elemDico);
             }
         }
