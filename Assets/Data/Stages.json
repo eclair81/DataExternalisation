@@ -28,11 +28,10 @@
 		{
 			"nom" : "end",
 			"rvb" : [102, 102, 102],
-			"src" : ["Sprites/Tiles/end"],
-			"dim" : [32, 32],
-			"scale":[0.5, 0.5],
-			"type": "endPoint",
-			"animDelay": 0.1
+			"src" : ["Sprites/Tiles/door"],
+			"dim" : [24, 24],
+			"scale":[1, 1],
+			"type": "endPoint"
 		},
 		{
 			"nom" : "grass",
