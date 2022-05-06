@@ -14,6 +14,8 @@ public class Collectible : MonoBehaviour
     private int currentFrame = 0;
     private int currentSheet = 0;
 
+    private bool pickedUp = false;
+
     public void Go(List<Sprite[]> list, float[] scale, float delay)
     {
         timeBeforeNextFrame = delay;
@@ -62,10 +64,29 @@ public class Collectible : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // To Do: player collects coins
-        if(other.tag == "Player")
+        if(!pickedUp)
         {
+            if(other.tag == "Player")
+            {
+                pickedUp = true;
 
+                // at least 2 spriteSheets -> 0: idle, 1: picked up
+                if(sheets.Count > 1)
+                {
+                    // Setting 2nd animation
+                    currentSheet++;
+                    currentFrame = 0;
+                    timerAnim = 0;
+
+                    //Leave enought time for the animation to play once
+                    Destroy(gameObject, timeBeforeNextFrame * sheets[currentSheet].Length);
+                }
+                else
+                {
+                    Debug.Log("Coin picked up!");
+                    Destroy(gameObject);
+                }
+            }
         }
     }
 }
