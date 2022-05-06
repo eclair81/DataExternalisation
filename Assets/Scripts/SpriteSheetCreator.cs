@@ -13,6 +13,16 @@ public static class SpriteSheetCreator : object
     {
         int nbSprites = (int)(fullSheet.width / width);
         Sprite[] spriteSheet = new Sprite[nbSprites];
+
+        float ppu;
+        if(width >=  height)
+        {
+            ppu = width; //ppu -> pixels per unit
+        }
+        else
+        {
+            ppu = height;
+        }
     
         for (int x = 0; x < nbSprites; x++)
         {
@@ -20,7 +30,7 @@ public static class SpriteSheetCreator : object
                 fullSheet,
                 new Rect(x * width, 0, width, height),
                 new Vector2(0.5f, 0.5f), // -> pivot point (center)
-                (float) width
+                ppu
             );
  
             spriteSheet[x] = newSprite;
@@ -40,12 +50,23 @@ public static class SpriteSheetCreator : object
         //int y = cooY;
         int y = ((int)fullSheet.height / height) - cooY - 1; // 0, 0 is bottom left, not top left, -1 correction
 
+        float ppu;
+        if(width >=  height)
+        {
+            ppu = width;
+        }
+        else
+        {
+            ppu = height;
+        }
+
         while (currentNumberExtracted != number)
         {
             Sprite newSprite = Sprite.Create(
                 fullSheet,
                 new Rect(x * width, y * height, width, height),
-                new Vector2(0.5f, 0.5f) // -> pivot point (center)
+                new Vector2(0.5f, 0.5f), // -> pivot point (center)
+                ppu
             );
 
             spriteSheet[currentNumberExtracted] = newSprite;
