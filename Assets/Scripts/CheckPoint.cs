@@ -2,26 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Collectible : MonoBehaviour
+public class CheckPoint : MonoBehaviour
 {
     private List<Sprite[]> sheets;
     private SpriteRenderer spriteRenderer;
 
-    private bool go = false;
+    private bool animStarted = false;
     private float timeBeforeNextFrame;
     private float timerAnim = 0f;
     
     private int currentFrame = 0;
-    private int currentSheet = 0;
 
     public void Go(List<Sprite[]> list, float[] scale, float delay)
     {
         timeBeforeNextFrame = delay;
-        //Debug.Log("delayAnim: " + timeBeforeNextFrame);
         sheets = list;
         
         spriteRenderer = GetComponent<SpriteRenderer>();
-        Sprite sprite = sheets[currentSheet][currentFrame];
+        Sprite sprite = sheets[0][currentFrame];
         spriteRenderer.sprite = sprite;
 
         //Add boxCollider
@@ -31,12 +29,11 @@ public class Collectible : MonoBehaviour
         //Scalling
         changeLocalScale(scale);
 
-        go = true;
     }
 
     void Update()
     {
-        if(!go)
+        if(!animStarted)
         {
             return;
         }
@@ -51,8 +48,13 @@ public class Collectible : MonoBehaviour
 
     private void NextFrame()
     {
-        currentFrame = (currentFrame + 1) % sheets[0].Length;
-        spriteRenderer.sprite = sheets[currentSheet][currentFrame];
+        currentFrame++;
+        if(currentFrame == 13)
+        {
+            // goes back to 1, because first sprite is unlighted torch
+            currentFrame = 1;
+        }
+        spriteRenderer.sprite = sheets[0][currentFrame];
     }
 
     private void changeLocalScale(float[] scale)
@@ -62,10 +64,13 @@ public class Collectible : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // To Do: player collects coins
-        if(other.tag == "Player")
-        {
+        if(other.tag == "Player"){
+            // To Do: save player checkpoint here
 
+
+            // Start anim torch
+            animStarted = true;
         }
+        
     }
 }

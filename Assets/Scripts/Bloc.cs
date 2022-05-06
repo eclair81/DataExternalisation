@@ -8,7 +8,7 @@ public class Bloc : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     
-    public void Go(List<Sprite[]> list, int[] d)
+    public void Go(List<Sprite[]> list)
     {
         sheets = list;
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -22,12 +22,5 @@ public class Bloc : MonoBehaviour
         //Set Ground Layer
         gameObject.layer = LayerMask.NameToLayer("Ground");
 
-        changeLocalScale(d);
     }
-
-    private void changeLocalScale(int[] d)
-    {
-        transform.localScale = new Vector3(100f / d[0], 100f / d[1], 1f);
-    }
-    
 }
