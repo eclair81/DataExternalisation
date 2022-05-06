@@ -52,7 +52,7 @@
 			"src" : ["Sprites/Tiles/coin_anim_strip_6", "Sprites/Tiles/coin_pickup_anim_strip_6"],
 			"dim" : [8, 8],
 			"type": "collectible",
-			"animDelay": 0.2
+			"animDelay": 0.1
 		},
 		{
 			"nom" : "foe",
