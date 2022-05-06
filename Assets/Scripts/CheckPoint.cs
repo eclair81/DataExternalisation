@@ -64,13 +64,17 @@ public class CheckPoint : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.tag == "Player"){
-            // To Do: save player checkpoint here
+        //Only useable once
+        if(!animStarted)
+        {
+            if(other.tag == "Player")
+            {
+                GameManager.SavePos(transform.position);
 
 
-            // Start anim torch
-            animStarted = true;
+                // Start anim torch
+                animStarted = true;
+            }
         }
-        
     }
 }

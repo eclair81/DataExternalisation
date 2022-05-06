@@ -78,12 +78,14 @@ public class Collectible : MonoBehaviour
                     currentFrame = 0;
                     timerAnim = 0;
 
+                    GameManager.GainCoin();
+
                     //Leave enought time for the animation to play once
                     Destroy(gameObject, timeBeforeNextFrame * sheets[currentSheet].Length);
                 }
                 else
                 {
-                    Debug.Log("Coin picked up!");
+                    GameManager.GainCoin();
                     Destroy(gameObject);
                 }
             }
