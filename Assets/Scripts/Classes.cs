@@ -27,6 +27,7 @@ public class Elem
     public string[] src;
     public int[] info;
     public int[] dim;
+    public float[] scale;
     public string type;
     public float animDelay;
 }
@@ -37,13 +38,15 @@ public class ElemDico
     public string type;
     public List<Sprite[]> sheets;
     public int[] dim;
+    public float[] scale;
     public float animDelay;
 
-    public ElemDico(string t, List<Sprite[]> l, int[] d, float a)
+    public ElemDico(string t, List<Sprite[]> l, int[] d, float[] s, float a)
     {
         type = t;
         sheets = l;
         dim = d;
+        scale = s;
         animDelay = a;
     }
 }

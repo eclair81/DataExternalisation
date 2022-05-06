@@ -19,9 +19,20 @@
 		{
 			"nom" : "flag",
 			"rvb" : [204, 204, 204],
-			"src" : ["Sprites/Tiles/flag"],
+			"src" : ["Sprites/Tiles/tiki_torch_props_strip_13"],
+			"dim" : [8, 24],
+			"scale":[1, 1],
+			"type": "checkPoint",
+			"animDelay": 0.1
+		},
+		{
+			"nom" : "end",
+			"rvb" : [102, 102, 102],
+			"src" : ["Sprites/Tiles/end"],
 			"dim" : [32, 32],
-			"type": "checkPoint"
+			"scale":[0.5, 0.5],
+			"type": "endPoint",
+			"animDelay": 0.1
 		},
 		{
 			"nom" : "grass",
@@ -51,6 +62,7 @@
 			"rvb" : [255, 235, 4],
 			"src" : ["Sprites/Tiles/coin_anim_strip_6", "Sprites/Tiles/coin_pickup_anim_strip_6"],
 			"dim" : [8, 8],
+			"scale":[0.5, 0.5],
 			"type": "collectible",
 			"animDelay": 0.1
 		},
