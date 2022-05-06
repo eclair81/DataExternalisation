@@ -12,6 +12,8 @@ public class LevelGenerator : MonoBehaviour
     public GameObject blocPrefab;
     public GameObject collectiblePrefab;
     public GameObject checkPointPrefab;
+    public GameObject endPointPrefab;
+    
 
     void Start()
     {
@@ -54,13 +56,21 @@ public class LevelGenerator : MonoBehaviour
                 switch (entry.Value.type)
                 {
                     case "spawnPoint":
-                        //things to do
+                        GameManager.SavePos(new Vector2(x, y));
+                        
                         return;
 
                     case "checkPoint":
                         GameObject torch = Instantiate(checkPointPrefab, new Vector2(x, y), Quaternion.identity);
                         CheckPoint torchScript = torch.GetComponent<CheckPoint>();
                         torchScript.Go(entry.Value.sheets, entry.Value.scale, entry.Value.animDelay);
+
+                        return;
+                    
+                    case "endPoint":
+                        GameObject end = Instantiate(endPointPrefab, new Vector2(x, y), Quaternion.identity);
+                        EndPoint endScript = end.GetComponent<EndPoint>();
+                        endScript.Go(entry.Value.sheets, entry.Value.scale, entry.Value.animDelay);
 
                         return;
 
