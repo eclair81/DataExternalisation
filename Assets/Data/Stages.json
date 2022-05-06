@@ -60,7 +60,7 @@
 		{
 			"nom" : "coin",
 			"rvb" : [255, 235, 4],
-			"src" : ["Sprites/Tiles/coin_anim_strip_6", "Sprites/Tiles/coin_pickup_anim_strip_6"],
+			"src" : ["Sprites/Tiles/coin_anim_strip_6", "Sprites/Tiles/coin_pickup_anim_strip_5"],
 			"dim" : [8, 8],
 			"scale":[0.5, 0.5],
 			"type": "collectible",
