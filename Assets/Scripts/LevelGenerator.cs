@@ -11,6 +11,7 @@ public class LevelGenerator : MonoBehaviour
     [Header("Prefabs")]
     public GameObject blocPrefab;
     public GameObject collectiblePrefab;
+    public GameObject checkPointPrefab;
 
     void Start()
     {
@@ -57,20 +58,23 @@ public class LevelGenerator : MonoBehaviour
                         return;
 
                     case "checkPoint":
-                        //things to do
+                        GameObject torch = Instantiate(checkPointPrefab, new Vector2(x, y), Quaternion.identity);
+                        CheckPoint torchScript = torch.GetComponent<CheckPoint>();
+                        torchScript.Go(entry.Value.sheets, entry.Value.scale, entry.Value.animDelay);
+
                         return;
 
                     case "bloc":
                         GameObject bloc = Instantiate(blocPrefab, new Vector2(x, y), Quaternion.identity);
                         Bloc blocScript = bloc.GetComponent<Bloc>();
-                        blocScript.Go(entry.Value.sheets, entry.Value.dim);
+                        blocScript.Go(entry.Value.sheets);
                         
                         return;
 
                     case "collectible":
                         GameObject coin = Instantiate(collectiblePrefab, new Vector2(x, y), Quaternion.identity);
                         Collectible coinScript = coin.GetComponent<Collectible>();
-                        coinScript.Go(entry.Value.sheets, entry.Value.animDelay);
+                        coinScript.Go(entry.Value.sheets, entry.Value.scale, entry.Value.animDelay);
 
                         return;
 
