@@ -21,10 +21,10 @@ public static class GameManager : object
     {
         coinNumber++;
         if(coinNumber == coinForExtraLife)
-        {
-            Debug.Log("Yay, an extra life!");
+        { 
             coinNumber = 0;
             livesLeft++;
+            //Debug.Log("Yay, an extra life! I have now " + livesLeft + " lifes");
         }
         //Debug.Log("Picked up a coin! Current number of coins: " + coinNumber);
     }
@@ -35,8 +35,13 @@ public static class GameManager : object
         playerSavedPos = pos;
     }
 
-    public static Vector2 GetPos()
+    public static Vector2 GetSavedPos()
     {
+        livesLeft--; // lose a live since this function is only called when the player dies.
+        if(livesLeft == 0)
+        {
+            Debug.Log("dead");
+        }
         return playerSavedPos;
     }
 
@@ -51,5 +56,10 @@ public static class GameManager : object
 
         Debug.Log("Loading next level...");
         LevelGenerator.Instance.GenerateLevel(JsonReader.Instance.maps[currentStage]);
+    }
+
+    public static bool IsOutOfStage(Transform t)
+    {
+        return t.position.y < -2;
     }
 }

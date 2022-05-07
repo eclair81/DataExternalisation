@@ -42,6 +42,12 @@ namespace TarodevController {
             CalculateJump(); // Possibly overrides vertical
 
             MoveCharacter(); // Actually perform the axis movement
+
+            //Checking if dead
+            if(GameManager.IsOutOfStage(transform))
+            {
+                transform.position = GameManager.GetSavedPos();
+            }
         }
 
 
