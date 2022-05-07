@@ -11,6 +11,12 @@ public static class GameManager : object
     private static Vector2 playerSavedPos;
     private static int currentStage = 0;
 
+    public static void SetInfos()
+    {
+        livesLeft = JsonReader.Instance.player.life;
+        coinForExtraLife = JsonReader.Instance.player.coinForLife;
+    }
+
     public static void GainCoin()
     {
         coinNumber++;

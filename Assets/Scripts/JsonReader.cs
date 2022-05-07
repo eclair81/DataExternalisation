@@ -26,6 +26,9 @@ public class JsonReader : MonoBehaviour
         stages = JsonUtility.FromJson<Stages>(stagesJson.text);
 
         //Process Json
+        //player
+        GameManager.SetInfos();
+
         //maps
         maps = new Texture2D[stages.stageList.Length];
         for(int i = 0; i < maps.Length; i++)
