@@ -297,5 +297,14 @@ namespace TarodevController {
         }
 
         #endregion
+
+        private void Start()
+        {
+            _acceleration = JsonReader.Instance.player.acceleration;
+            _moveClamp = JsonReader.Instance.player.maxSpeed;
+            _deAcceleration = JsonReader.Instance.player.deceleration;
+            _jumpHeight = JsonReader.Instance.player.jumpHeight;
+            _coyoteTimeThreshold = JsonReader.Instance.player.coyoteTime;
+        }
     }
 }
