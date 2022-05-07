@@ -2,76 +2,82 @@
 {
 	"stageList":
 	[
-		"stage1",
-		"stage2",
-		"stage3"
+		"Stages/stage1",
+		"Stages/stage3",
+		"Stages/stage2"
 	],
 
+	"colorFidelity": 10,
 
-	"colorToElem":
+	"colorMapping":
 	[
 		{
-			"r"   : 0,
-			"v"   : 0,
-			"b"   : 0,
-			"src" : "",
+			"nom" : "start",
+			"rvb" : [0, 0, 0],
 			"type": "spawnPoint"
 		},
 		{
-			"r"   : 100,
-			"v"   : 100,
-			"b"   : 100,
-			"src" : "flag",
-			"type": "checkPoint"
+			"nom" : "flag",
+			"rvb" : [204, 204, 204],
+			"src" : ["Sprites/Tiles/tiki_torch_props_strip_13"],
+			"dim" : [8, 24],
+			"scale":[1, 1],
+			"type": "checkPoint",
+			"animDelay": 0.1
 		},
 		{
-			"r"   : 0,
-			"v"   : 255,
-			"b"   : 0,
-			"src" : "grass",
+			"nom" : "end",
+			"rvb" : [102, 102, 102],
+			"src" : ["Sprites/Tiles/door"],
+			"dim" : [24, 24],
+			"scale":[1, 1],
+			"type": "endPoint"
+		},
+		{
+			"nom" : "grass",
+			"rvb" : [0, 204, 0],
+			"src" : ["Sprites/Tiles/tileset_32x32(new)"],
+			"info": [0, 0, 3],
+			"dim" : [32, 32],
 			"type": "bloc"
 		},
 		{
-			"r"   : 180,
-			"v"   : 130,
-			"b"   : 50,
-			"src" : "dirt",
+			"nom" : "dirt",
+			"rvb" : [255, 128, 0],
+			"src" : ["Sprites/Tiles/tileset_32x32(new)"],
+			"info": [1, 1, 1],
+			"dim" : [32, 32],
 			"type": "bloc"
 		},
 		{
-			"r"   : 0,
-			"v"   : 255,
-			"b"   : 0,
-			"src" : "brick",
-			"type": "bloc"
+			"nom" : "coin",
+			"rvb" : [255, 235, 4],
+			"src" : ["Sprites/Tiles/coin_anim_strip_6", "Sprites/Tiles/coin_pickup_anim_strip_5"],
+			"dim" : [8, 8],
+			"scale":[0.5, 0.5],
+			"type": "collectible",
+			"animDelay": 0.1
 		},
 		{
-			"r"   : 255,
-			"v"   : 235,
-			"b"   : 4,
-			"src" : "coin",
-			"type": "collectible"
+			"nom" : "foe",
+			"rvb" : [255, 0, 0],
+			"src" : ["Sprites/Foes/foe"],
+			"dim" : [32, 32],
+			"type": "foe1"
 		},
 		{
-			"r"   : 255,
-			"v"   : 0,
-			"b"   : 0,
-			"src" : "enemie",
-			"type": "enemi1"
+			"nom" : "foe2",
+			"rvb" : [220, 90, 90],
+			"src" : ["Sprites/Foes/foe2"],
+			"dim" : [32, 32],
+			"type": "foe2"
 		},
 		{
-			"r"   : 220,
-			"v"   : 90,
-			"b"   : 90,
-			"src" : "enemi2",
-			"type": "enemi2"
-		},
-		{
-			"r"   : 200,
-			"v"   : 0,
-			"b"   : 0,
-			"src" : "enemi3",
-			"type": "enemi3"
+			"nom" : "foe3",
+			"rvb" : [200, 0, 0],
+			"src" : ["Sprites/Foes/foe3"],
+			"dim" : [32, 32],
+			"type": "foe3"
 		}
 	]
 }

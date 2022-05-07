@@ -1,3 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 public class Player
 {
     public int life;
@@ -11,15 +15,38 @@ public class Player
 public class Stages
 {
     public string[] stageList;
-    public Elem[] colorToElem;
+    public int colorFidelity;
+    public Elem[] colorMapping;
 }
 
 [System.Serializable]
 public class Elem
 {
-    public int r;
-    public int v;
-    public int b;
-    public string src;
+    public string nom;
+    public int[] rvb;
+    public string[] src;
+    public int[] info;
+    public int[] dim;
+    public float[] scale;
     public string type;
+    public float animDelay;
+}
+
+
+public class ElemDico
+{
+    public string type;
+    public List<Sprite[]> sheets;
+    public int[] dim;
+    public float[] scale;
+    public float animDelay;
+
+    public ElemDico(string t, List<Sprite[]> l, int[] d, float[] s, float a)
+    {
+        type = t;
+        sheets = l;
+        dim = d;
+        scale = s;
+        animDelay = a;
+    }
 }
