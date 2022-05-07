@@ -123,6 +123,36 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &275553833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 275553834}
+  m_Layer: 0
+  m_Name: CurrentStage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &275553834
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 275553833}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6.569274, y: 5.7868567, z: -132.76744}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &361186728
 GameObject:
   m_ObjectHideFlags: 0
@@ -156,6 +186,8 @@ MonoBehaviour:
   collectiblePrefab: {fileID: 4530682547818239594, guid: 8caf8a6c84bb4264b8f45cf9cee7890d, type: 3}
   checkPointPrefab: {fileID: 5767387119389397174, guid: 6394be1508511cc4ea4284981f6b5fcf, type: 3}
   endPointPrefab: {fileID: 4739371031909999452, guid: c1039df445ac57f49a82524b49152c65, type: 3}
+  player: {fileID: 1446836160}
+  parent: {fileID: 275553834}
 --- !u!4 &361186730
 Transform:
   m_ObjectHideFlags: 0
