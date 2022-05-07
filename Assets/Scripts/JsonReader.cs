@@ -85,13 +85,34 @@ public class JsonReader : MonoBehaviour
                     allSprites.Add(sheet);
                 }
 
-                ElemDico elemDico = new ElemDico(elem.type, allSprites, elem.dim, elem.scale, elem.animDelay);
+                // Audio
+                AudioClip audio = null;
+                if(elem.sound != null)
+                {
+                    audio = Resources.Load<AudioClip>(elem.sound);
+                    
+                    /*try {
+                        audio = Resources.Load<AudioClip>(elem.sound);
+                    } catch {
+                        //Debug.Log("There is no audio for " + elem.sound);
+                        //Add empty spritesheet
+                        allSprites.Add(new Sprite[0]);
+                    }*/
+                }
+
+                ElemDico elemDico = new ElemDico(elem.type, allSprites, elem.dim, elem.scale, elem.animDelay, audio);
                 dicoMapping.Add(elem.rvb, elemDico);
             }
             else
             {
+                AudioClip audio = null;
+                if(elem.sound != null)
+                {
+                    audio = Resources.Load<AudioClip>(elem.sound);
+                }
+
                 // if there is no sprites for that element (spawnpoint), we still add it into the dictionary, but with an empty list of Sprite[]
-                ElemDico elemDico = new ElemDico(elem.type, new List<Sprite[]>(), new int[2]{0, 0}, new float[2]{0, 0}, 0);
+                ElemDico elemDico = new ElemDico(elem.type, new List<Sprite[]>(), new int[2]{0, 0}, new float[2]{0, 0}, 0, audio);
                 dicoMapping.Add(elem.rvb, elemDico);
             }
         }
