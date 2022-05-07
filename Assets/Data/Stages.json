@@ -3,8 +3,7 @@
 	"stageList":
 	[
 		"Stages/stage1",
-		"Stages/stage2",
-		"Stages/stage3"
+		"Stages/stage2"
 	],
 
 	"colorFidelity": 10,
@@ -46,13 +45,6 @@
 			"rvb" : [255, 128, 0],
 			"src" : ["Sprites/Tiles/tileset_32x32(new)"],
 			"info": [1, 1, 1],
-			"dim" : [32, 32],
-			"type": "bloc"
-		},
-		{
-			"nom" : "brick",
-			"rvb" : [80, 65, 10],
-			"src" : ["Sprites/Tiles/brick"],
 			"dim" : [32, 32],
 			"type": "bloc"
 		},
