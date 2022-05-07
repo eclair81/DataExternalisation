@@ -5,9 +5,16 @@ using UnityEngine;
 public class Player
 {
     public int life;
-    public float speed;
+    public float acceleration;
+    public float maxSpeed;
+    public float deceleration;
     public float jumpHeight;
-    public string spriteSheet;
+    public float coyoteTime;
+    public string[] src; // Need 5 sheets: Idle, Run, Jump, Fall, Death (in that order)
+    public int[] dim;
+    public int[] info; // only required if there are multiple sheets to extract from a single set
+    public float[] scale;
+    public float animDelay;
 }
 
 
