@@ -7,8 +7,9 @@ public static class GameManager : object
     public static int livesLeft;
     public static int coinNumber = 0;
     public static int coinForExtraLife;
+
     private static Vector2 playerSavedPos;
-    
+    private static int currentStage = 0;
 
     public static void GainCoin()
     {
@@ -35,7 +36,14 @@ public static class GameManager : object
 
     public static void NextLevel()
     {
+        currentStage++;
+        if(currentStage == JsonReader.Instance.maps.Length)
+        {
+            Debug.Log("gégé, c gagné!!");
+            return;
+        }
+
         Debug.Log("Loading next level...");
-        //To Do
+        LevelGenerator.Instance.GenerateLevel(JsonReader.Instance.maps[currentStage]);
     }
 }

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
-    //private Elem[] colorMapping;
+    public static LevelGenerator Instance;
+
     private int threshold;
     private Dictionary<int[], ElemDico> dicoMapping;
     
@@ -13,11 +14,17 @@ public class LevelGenerator : MonoBehaviour
     public GameObject collectiblePrefab;
     public GameObject checkPointPrefab;
     public GameObject endPointPrefab;
-    
+
+    [Header("Player")]
+    public Transform player;
+
+    [Header("Stage")]
+    public Transform parent;
 
     void Start()
     {
-        //colorMapping = JsonReader.Instance.stages.colorMapping;
+        Instance = this;
+        
         threshold = JsonReader.Instance.stages.colorFidelity;
         dicoMapping = JsonReader.Instance.dicoMapping;
         
@@ -28,6 +35,7 @@ public class LevelGenerator : MonoBehaviour
 
     public void GenerateLevel(Texture2D map)
     {
+        ClearLevel();
         for (int x = 0; x < map.width; x++)
         {
             for (int y = 0; y < map.height; y++)
@@ -56,33 +64,35 @@ public class LevelGenerator : MonoBehaviour
                 switch (entry.Value.type)
                 {
                     case "spawnPoint":
-                        GameManager.SavePos(new Vector2(x, y));
+                        Vector2 start = new Vector2(x, y);
+                        GameManager.SavePos(start);
+                        player.position = start;
                         
                         return;
 
                     case "checkPoint":
-                        GameObject torch = Instantiate(checkPointPrefab, new Vector2(x, y), Quaternion.identity);
+                        GameObject torch = Instantiate(checkPointPrefab, new Vector2(x, y), Quaternion.identity, parent);
                         CheckPoint torchScript = torch.GetComponent<CheckPoint>();
                         torchScript.Go(entry.Value.sheets, entry.Value.scale, entry.Value.animDelay);
 
                         return;
                     
                     case "endPoint":
-                        GameObject end = Instantiate(endPointPrefab, new Vector2(x, y), Quaternion.identity);
+                        GameObject end = Instantiate(endPointPrefab, new Vector2(x, y), Quaternion.identity, parent);
                         EndPoint endScript = end.GetComponent<EndPoint>();
                         endScript.Go(entry.Value.sheets, entry.Value.scale, entry.Value.animDelay);
 
                         return;
 
                     case "bloc":
-                        GameObject bloc = Instantiate(blocPrefab, new Vector2(x, y), Quaternion.identity);
+                        GameObject bloc = Instantiate(blocPrefab, new Vector2(x, y), Quaternion.identity, parent);
                         Bloc blocScript = bloc.GetComponent<Bloc>();
                         blocScript.Go(entry.Value.sheets);
                         
                         return;
 
                     case "collectible":
-                        GameObject coin = Instantiate(collectiblePrefab, new Vector2(x, y), Quaternion.identity);
+                        GameObject coin = Instantiate(collectiblePrefab, new Vector2(x, y), Quaternion.identity, parent);
                         Collectible coinScript = coin.GetComponent<Collectible>();
                         coinScript.Go(entry.Value.sheets, entry.Value.scale, entry.Value.animDelay);
 
@@ -104,18 +114,15 @@ public class LevelGenerator : MonoBehaviour
                         Debug.Log("Incorrect type (" + entry.Value.type +") for [" + entry.Key[0] + ", " + entry.Key[1] + ", " + entry.Key[2] + "]");
                         return;
                 }
-
-
-                //Debug.Log("Is this a bloc? " + entry.Value.type == "bloc");
-                /*if(entry.Value.type == "bloc")
-                {
-                    GameObject bloc = Instantiate(blocPrefab, new Vector2(x, y), Quaternion.identity);
-                    Bloc blocScript = bloc.GetComponent<Bloc>();
-                    blocScript.Go(entry.Value.sheets, entry.Value.dim);
-                    // don't look the remaining entries
-                    break;
-                }*/
             }
+        }
+    }
+
+    private void ClearLevel()
+    {
+        foreach (Transform child in parent)
+        {
+            Destroy(child.gameObject);
         }
     }
 
