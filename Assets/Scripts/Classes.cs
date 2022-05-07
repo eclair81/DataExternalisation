@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player
 {
     public int life;
+    public int coinForLife;
     public float acceleration;
     public float maxSpeed;
     public float deceleration;

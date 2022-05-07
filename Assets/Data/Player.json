@@ -1,6 +1,7 @@
 
 {
 	"life"		  : 3,
+	"coinForLife" : 25,
 	"acceleration": 90,
 	"maxSpeed"    : 13,
 	"deceleration": 60,
