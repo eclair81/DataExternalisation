@@ -16,7 +16,9 @@ public class Collectible : MonoBehaviour
 
     private bool pickedUp = false;
 
-    public void Go(List<Sprite[]> list, float[] scale, float delay)
+    private AudioSource audioSource;
+
+    public void Go(List<Sprite[]> list, float[] scale, float delay, AudioClip sound)
     {
         timeBeforeNextFrame = delay;
         //Debug.Log("delayAnim: " + timeBeforeNextFrame);
@@ -29,6 +31,10 @@ public class Collectible : MonoBehaviour
         //Add boxCollider
         BoxCollider2D boxCollider = gameObject.AddComponent<BoxCollider2D>();
         boxCollider.isTrigger = true;
+
+        //Add AudioSource
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = sound;
 
         //Scalling
         changeLocalScale(scale);
@@ -69,6 +75,8 @@ public class Collectible : MonoBehaviour
             if(other.tag == "Player")
             {
                 pickedUp = true;
+
+                audioSource.Play();
 
                 // at least 2 spriteSheets -> 0: idle, 1: picked up
                 if(sheets.Count > 1)

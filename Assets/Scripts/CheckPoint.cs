@@ -13,7 +13,9 @@ public class CheckPoint : MonoBehaviour
     
     private int currentFrame = 0;
 
-    public void Go(List<Sprite[]> list, float[] scale, float delay)
+    private AudioSource audioSource;
+
+    public void Go(List<Sprite[]> list, float[] scale, float delay, AudioClip sound)
     {
         timeBeforeNextFrame = delay;
         sheets = list;
@@ -25,6 +27,10 @@ public class CheckPoint : MonoBehaviour
         //Add boxCollider
         BoxCollider2D boxCollider = gameObject.AddComponent<BoxCollider2D>();
         boxCollider.isTrigger = true;
+
+        //Add AudioSource
+        audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.clip = sound;
 
         //Scalling
         changeLocalScale(scale);
@@ -70,7 +76,7 @@ public class CheckPoint : MonoBehaviour
             if(other.tag == "Player")
             {
                 GameManager.SavePos(transform.position);
-
+                audioSource.Play();
 
                 // Start anim torch
                 animStarted = true;
