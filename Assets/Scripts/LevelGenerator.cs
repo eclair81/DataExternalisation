@@ -24,7 +24,7 @@ public class LevelGenerator : MonoBehaviour
     void Start()
     {
         Instance = this;
-        
+
         threshold = JsonReader.Instance.stages.colorFidelity;
         dicoMapping = JsonReader.Instance.dicoMapping;
         
@@ -60,6 +60,8 @@ public class LevelGenerator : MonoBehaviour
         {
             if(ColorsAreClose(entry.Key, pixel))
             {
+
+                //Debug.Log(pixel + " has been recognized as [" + entry.Key[0] + ", " + entry.Key[1] + ", " + entry.Key[2] + "]");
 
                 switch (entry.Value.type)
                 {
@@ -116,6 +118,7 @@ public class LevelGenerator : MonoBehaviour
                 }
             }
         }
+        //Debug.Log(pixel + " at x: " + x + ", and y: "+ y +" hasn't been recognized...");
     }
 
     private void ClearLevel()
