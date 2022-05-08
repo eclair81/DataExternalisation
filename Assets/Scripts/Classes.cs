@@ -14,7 +14,6 @@ public class Player
     public string[] src; // Need 5 sheets: Idle, Run, Jump, Fall, Death (in that order)
     public int[] dim;
     public int[] info; // only required if there are multiple sheets to extract from a single set
-    public float[] scale;
     public float animDelay;
 }
 
