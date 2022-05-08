@@ -93,64 +93,93 @@ public class LevelGenerator : MonoBehaviour
 
                         //look at this bloc's up/down/left/right neighbor to determine which sprite from which sheet display
                         bool up, down, left, right;
-                        //in a try catch to avoid errors for border pixels
-                        try{
-                            Color neighbor = map.GetPixel(x, y+1);
-                            if(neighbor.a != 0)
-                            {
-                                up = ColorsAreClose(pixel, neighbor);
-                            }
-                            else
-                            {
-                                up = false;
-                            }
-                        }catch{
+                        
+                        if(y == map.height)
+                        {
                             up = false;
                         }
-
-                        try{
-                            Color neighbor = map.GetPixel(x, y-1);
-                            if(neighbor.a != 0)
-                            {
-                                down = ColorsAreClose(pixel, neighbor);
+                        else
+                        {
+                            try{
+                                Color neighbor = map.GetPixel(x, y+1);
+                                if(neighbor.a != 0)
+                                {
+                                    up = ColorsAreClose(pixel, neighbor);
+                                }
+                                else
+                                {
+                                    up = false;
+                                }
+                            }catch{
+                                up = false;
                             }
-                            else
-                            {
-                                down = false;
-                            }
-                        }catch{
+                        }
+                        
+                        if(y == 0)
+                        {
                             down = false;
                         }
+                        else{
+                            try{
+                                Color neighbor = map.GetPixel(x, y-1);
+                                if(neighbor.a != 0)
+                                {
+                                    down = ColorsAreClose(pixel, neighbor);
+                                }
+                                else
+                                {
+                                    down = false;
+                                }
+                            }catch{
+                                down = false;
+                            }
+                        }
 
-                        try{
-                            Color neighbor = map.GetPixel(x-1, y);
-                            if(neighbor.a != 0)
-                            {
-                                left = ColorsAreClose(pixel, neighbor);
-                                Debug.Log("left neighbor of "+ x +" "+ y + " is " + (x-1)+" "+ y+"\n It's color is " + neighbor + "\n same color? : " + left.ToString());
-                                
-                            }
-                            else
-                            {
-                                left = false;
-                            }
-                        }catch{
+                        if(x == 0)
+                        {
                             left = false;
                         }
+                        else{
+                            try{
+                                Color neighbor = map.GetPixel(x-1, y);
+                                if(neighbor.a != 0)
+                                {
+                                    left = ColorsAreClose(pixel, neighbor);
+                                    //Debug.Log("left neighbor of "+ x +" "+ y + " is " + (x-1)+" "+ y+"\n It's color is " + neighbor + "\n same color? : " + left.ToString());
+                                    
+                                }
+                                else
+                                {
+                                    left = false;
+                                }
+                            }catch{
+                                left = false;
+                            }
+                        }
 
-                        try{
-                            Color neighbor = map.GetPixel(x+1, y);
-                            if(neighbor.a != 0)
-                            {
-                                right = ColorsAreClose(pixel, neighbor);
-                            }
-                            else
-                            {
-                                right = false;
-                            }
-                        }catch{
+                        if(x == map.width)
+                        {
                             right = false;
                         }
+                        else
+                        {
+                            try{
+                                Color neighbor = map.GetPixel(x+1, y);
+                                if(neighbor.a != 0)
+                                {
+                                    right = ColorsAreClose(pixel, neighbor);
+                                }
+                                else
+                                {
+                                    right = false;
+                            }
+                            }catch{
+                                right = false;
+                            }
+                        }
+                        
+
+
 
                         int[] res = WhichSprite(up, down, left, right);
                         Debug.Log(x + ", " + y + "has sprite: " + res[0] + ", " + res[1] + "\n neighbors: up: " + up.ToString() + " down: " + down.ToString() + "  left: " + left.ToString() + "  right: " + right.ToString());
