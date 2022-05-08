@@ -87,9 +87,75 @@ public class LevelGenerator : MonoBehaviour
                         return;
 
                     case "bloc":
+                        Debug.Log("spawn bloc at " + x + " " + y);
                         GameObject bloc = Instantiate(blocPrefab, new Vector2(x, y), Quaternion.identity, parent);
                         Bloc blocScript = bloc.GetComponent<Bloc>();
-                        blocScript.Go(entry.Value.sheets, 0, 0);
+
+                        //look at this bloc's up/down/left/right neighbor to determine which sprite from which sheet display
+                        bool up, down, left, right;
+                        //in a try catch to avoid errors for border pixels
+                        try{
+                            Color neighbor = map.GetPixel(x, y+1);
+                            if(neighbor.a != 0)
+                            {
+                                up = ColorsAreClose(pixel, neighbor);
+                            }
+                            else
+                            {
+                                up = false;
+                            }
+                        }catch{
+                            up = false;
+                        }
+
+                        try{
+                            Color neighbor = map.GetPixel(x, y-1);
+                            if(neighbor.a != 0)
+                            {
+                                down = ColorsAreClose(pixel, neighbor);
+                            }
+                            else
+                            {
+                                down = false;
+                            }
+                        }catch{
+                            down = false;
+                        }
+
+                        try{
+                            Color neighbor = map.GetPixel(x-1, y);
+                            if(neighbor.a != 0)
+                            {
+                                left = ColorsAreClose(pixel, neighbor);
+                                Debug.Log("left neighbor of "+ x +" "+ y + " is " + (x-1)+" "+ y+"\n It's color is " + neighbor + "\n same color? : " + left.ToString());
+                                
+                            }
+                            else
+                            {
+                                left = false;
+                            }
+                        }catch{
+                            left = false;
+                        }
+
+                        try{
+                            Color neighbor = map.GetPixel(x+1, y);
+                            if(neighbor.a != 0)
+                            {
+                                right = ColorsAreClose(pixel, neighbor);
+                            }
+                            else
+                            {
+                                right = false;
+                            }
+                        }catch{
+                            right = false;
+                        }
+
+                        int[] res = WhichSprite(up, down, left, right);
+                        Debug.Log(x + ", " + y + "has sprite: " + res[0] + ", " + res[1] + "\n neighbors: up: " + up.ToString() + " down: " + down.ToString() + "  left: " + left.ToString() + "  right: " + right.ToString());
+
+                        blocScript.Go(entry.Value.sheets, res[0], res[1]);
                         
                         return;
 
@@ -139,6 +205,55 @@ public class LevelGenerator : MonoBehaviour
             g = rvb[1] - (c.g * 255),
             b = rvb[2] - (c.b * 255);
         return (r*r + g*g + b*b) <= threshold*threshold;
+    }
+
+    private bool ColorsAreClose(Color c1, Color c2/*, int threshold = 10*/)
+    {
+        float  r = (c1.r * 255) - (c2.r * 255),
+            g = (c1.g * 255) - (c2.g * 255),
+            b = (c1.b * 255) - (c2.b * 255);
+        return (r*r + g*g + b*b) <= threshold*threshold;
+    }
+
+    private int[] WhichSprite(bool up, bool down, bool left, bool right)
+    {
+        switch(up, down, left, right)
+        {
+            case (false, false, false, false):
+                return new int[2] {0, 1};
+            case (false, false, false, true):
+                return new int[2] {0, 0};
+            case (false, false, true, false):
+                return new int[2] {0, 2};
+            case (false, false, true, true):
+                return new int[2] {0, 1};
+            case (false, true, false, false):
+                return new int[2] {0, 1};
+            case (false, true, false, true):
+                return new int[2] {0, 0};
+            case (false, true, true, false):
+                return new int[2] {0, 2};
+            case (false, true, true, true):
+                return new int[2] {0, 1};
+            case (true, false, false, false):
+                return new int[2] {2, 1};
+            case (true, false, false, true):
+                return new int[2] {2, 0};
+            case (true, false, true, false):
+                return new int[2] {2, 2};
+            case (true, false, true, true):
+                return new int[2] {2, 1};
+            case (true, true, false, false):
+                return new int[2] {1, 1};
+            case (true, true, false, true):
+                return new int[2] {1, 0};
+            case (true, true, true, false):
+                return new int[2] {1, 2};
+            case (true, true, true, true):
+                return new int[2] {1, 1};
+            default:
+                return new int[2] {0, 0};
+        }
     }
 
 }
