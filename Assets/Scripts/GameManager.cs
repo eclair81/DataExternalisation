@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TarodevController;
 
 public static class GameManager : object
 {
@@ -10,6 +11,8 @@ public static class GameManager : object
 
     private static Vector2 playerSavedPos;
     private static int currentStage = 0;
+
+    public static PlayerController player;
 
     public static void SetInfos()
     {
@@ -24,6 +27,7 @@ public static class GameManager : object
         { 
             coinNumber = 0;
             livesLeft++;
+            player.playLifeSound();
             //Debug.Log("Yay, an extra life! I have now " + livesLeft + " lifes");
         }
         //Debug.Log("Picked up a coin! Current number of coins: " + coinNumber);

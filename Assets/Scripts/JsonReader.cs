@@ -17,6 +17,8 @@ public class JsonReader : MonoBehaviour
     public Texture2D[] maps;
     public Dictionary<int[], ElemDico> dicoMapping;
     public List<Sprite[]> pSheets;
+    public AudioClip deathSound;
+    public AudioClip lifeSound;
 
 
     void Awake()
@@ -77,7 +79,17 @@ public class JsonReader : MonoBehaviour
             }
         }
 
-        
+        lifeSound = null;
+        if(player.extraLifeSound != null)
+        {
+            lifeSound = Resources.Load<AudioClip>(player.extraLifeSound);
+        }
+
+        deathSound = null;
+        if(player.deathSound != null)
+        {
+            deathSound = Resources.Load<AudioClip>(player.deathSound);
+        }
 
 
         //maps

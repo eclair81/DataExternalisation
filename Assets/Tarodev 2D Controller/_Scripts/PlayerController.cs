@@ -95,6 +95,7 @@ namespace TarodevController {
             if(GameManager.IsOutOfStage(transform))
             {
                 isDying = true;
+                death.Play();
                 changeSheet(4);
             }
         }
@@ -365,6 +366,9 @@ namespace TarodevController {
         private float timerDeath = 0f;
         private float timeBeforeRespawn;
 
+        private AudioSource death;
+        private AudioSource life;
+
         private void Start()
         {
             _acceleration = JsonReader.Instance.player.acceleration;
@@ -379,7 +383,12 @@ namespace TarodevController {
             //Debug.Log(extentX + " " + extentY);
             _characterBounds.extents = new Vector3(extentX, extentY, 0);
 
-            
+            //AudioSource
+            death = gameObject.AddComponent<AudioSource>();
+            death.clip = JsonReader.Instance.deathSound;
+
+            life = gameObject.AddComponent<AudioSource>();
+            life.clip = JsonReader.Instance.lifeSound;
 
             //SpriteRenderer
             spriteSheets = JsonReader.Instance.pSheets;
@@ -387,6 +396,9 @@ namespace TarodevController {
             timeBeforeRespawn = JsonReader.Instance.player.animDelay * spriteSheets[4].Length;
             spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             spriteRenderer.sprite = spriteSheets[0][0];
+
+            //set ref in GameManager
+            GameManager.player = this;
         }
 
         private void NextSprite()
@@ -402,6 +414,11 @@ namespace TarodevController {
                 sheetNumber = newSheet;
                 spriteNumber = 0;
             }
+        }
+
+        public void playLifeSound()
+        {
+            life.Play();
         }
     }
 }
