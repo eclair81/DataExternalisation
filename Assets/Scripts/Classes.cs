@@ -17,6 +17,7 @@ public class Player
     public float animDelay;
     public string extraLifeSound;
     public string deathSound;
+    public float[] volume;
 }
 
 
@@ -40,6 +41,7 @@ public class Elem
     public string type;
     public float animDelay;
     public string sound;
+    public float[] volume;
 }
 
 
@@ -51,8 +53,9 @@ public class ElemDico
     public float[] scale;
     public float animDelay;
     public AudioClip sound;
+    public float volume;
 
-    public ElemDico(string t, List<Sprite[]> l, int[] d, float[] s, float ad, AudioClip ac)
+    public ElemDico(string t, List<Sprite[]> l, int[] d, float[] s, float ad, AudioClip ac, float v)
     {
         type = t;
         sheets = l;
@@ -60,5 +63,6 @@ public class ElemDico
         scale = s;
         animDelay = ad;
         sound = ac;
+        volume = v;
     }
 }
