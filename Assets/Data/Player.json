@@ -1,7 +1,16 @@
 
 {
-	"life"		 : 3,
-	"speed"      : 5,
-	"jumpHeight" : 3,
-	"spriteSheet": "PlayerSheet"
+	"life"		  : 3,
+	"coinForLife" : 25,
+	"acceleration": 90,
+	"maxSpeed"    : 13,
+	"deceleration": 60,
+	"jumpHeight"  : 25,
+	"coyoteTime"  : 0.1,
+	"src"		  : ["Sprites/Player/herochar_spritesheet(new)"],
+	"dim" 		  : [16, 16],
+	"info"		  : [0, 5, 4, 0, 1, 6, 0, 7, 3, 0, 6, 3, 0, 0, 8],
+	"animDelay"   : 0.1,
+	"extraLifeSound": "Sounds/ArcadeBonus",
+	"deathSound"  : "Sounds/ArcadeRetroGameOver"
 }

@@ -42,6 +42,62 @@ namespace TarodevController {
             CalculateJump(); // Possibly overrides vertical
 
             MoveCharacter(); // Actually perform the axis movement
+
+            //Animation Timer
+            timerAnim += Time.deltaTime;
+            if(timerAnim >= timeBeforeNextFrame)
+            {
+                timerAnim = 0f;
+                NextSprite();
+            }
+
+            //Which Animation to play?
+            if(!isDying){
+                //Jumping
+                if(_currentVerticalSpeed > 0)
+                {
+                    changeSheet(2);
+                }
+                //Falling
+                else if(_currentVerticalSpeed < 0)
+                {
+                    changeSheet(3);
+                }
+                //on the ground
+                else
+                {
+                    //Running
+                    if(Input.X != 0)
+                    {
+                        changeSheet(1);
+                    }
+                    //Idle
+                    else
+                    {
+                        changeSheet(0);
+                    }
+                    
+                }
+            }
+            else
+            {
+                //letting enought time for the death animation to play once
+                timerDeath += Time.deltaTime;
+                if(timerDeath >= timeBeforeRespawn)
+                {
+                    transform.position = GameManager.GetSavedPos();
+                    timerDeath = 0f;
+                    isDying = false;
+                }
+            }
+
+            //Checking if dead
+            if(GameManager.IsOutOfStage(transform))
+            {
+                isDying = true;
+                death.Play();
+                changeSheet(4);
+            }
         }
 
 
@@ -297,5 +353,72 @@ namespace TarodevController {
         }
 
         #endregion
+
+
+
+        private List<Sprite[]> spriteSheets;
+        private SpriteRenderer spriteRenderer;
+        private int sheetNumber = 0;
+        private int spriteNumber = 0;
+        private float timeBeforeNextFrame;
+        private float timerAnim = 0f;
+        private bool isDying = false;
+        private float timerDeath = 0f;
+        private float timeBeforeRespawn;
+
+        private AudioSource death;
+        private AudioSource life;
+
+        private void Start()
+        {
+            _acceleration = JsonReader.Instance.player.acceleration;
+            _moveClamp = JsonReader.Instance.player.maxSpeed;
+            _deAcceleration = JsonReader.Instance.player.deceleration;
+            _jumpHeight = JsonReader.Instance.player.jumpHeight;
+            _coyoteTimeThreshold = JsonReader.Instance.player.coyoteTime;
+
+            //Set Character Bounds close to sprite size  ~ 1 unity unit * scale
+            float extentX = 0.5f /** JsonReader.Instance.player.scale[0]*/;
+            float extentY = 0.5f /** JsonReader.Instance.player.scale[1]*/;
+            //Debug.Log(extentX + " " + extentY);
+            _characterBounds.extents = new Vector3(extentX, extentY, 0);
+
+            //AudioSource
+            death = gameObject.AddComponent<AudioSource>();
+            death.clip = JsonReader.Instance.deathSound;
+
+            life = gameObject.AddComponent<AudioSource>();
+            life.clip = JsonReader.Instance.lifeSound;
+
+            //SpriteRenderer
+            spriteSheets = JsonReader.Instance.pSheets;
+            timeBeforeNextFrame = JsonReader.Instance.player.animDelay;
+            timeBeforeRespawn = JsonReader.Instance.player.animDelay * spriteSheets[4].Length;
+            spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            spriteRenderer.sprite = spriteSheets[0][0];
+
+            //set ref in GameManager
+            GameManager.player = this;
+        }
+
+        private void NextSprite()
+        {
+            spriteNumber = (spriteNumber + 1) % spriteSheets[sheetNumber].Length;
+            spriteRenderer.sprite = spriteSheets[sheetNumber][spriteNumber];
+        }
+
+        private void changeSheet(int newSheet)
+        {
+            if(sheetNumber != newSheet)
+            {
+                sheetNumber = newSheet;
+                spriteNumber = 0;
+            }
+        }
+
+        public void playLifeSound()
+        {
+            life.Play();
+        }
     }
 }
