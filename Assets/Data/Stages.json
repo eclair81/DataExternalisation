@@ -58,7 +58,8 @@
 			"scale":[0.5, 0.5],
 			"type": "collectible",
 			"animDelay": 0.1,
-			"sound": "Sounds/Coin"
+			"sound": "Sounds/Coin",
+			"volume": [0.5]
 		},
 		{
 			"nom" : "foe",
