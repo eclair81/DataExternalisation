@@ -94,7 +94,7 @@ public class LevelGenerator : MonoBehaviour
                         //look at this bloc's up/down/left/right neighbor to determine which sprite from which sheet display
                         bool up, down, left, right;
                         
-                        if(y == map.height)
+                        if(y == map.height-1)
                         {
                             up = false;
                         }
@@ -157,7 +157,7 @@ public class LevelGenerator : MonoBehaviour
                             }
                         }
 
-                        if(x == map.width)
+                        if(x == map.width-1)
                         {
                             right = false;
                         }
