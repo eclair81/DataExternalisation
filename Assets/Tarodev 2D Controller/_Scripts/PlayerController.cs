@@ -378,7 +378,7 @@ namespace TarodevController {
             _coyoteTimeThreshold = JsonReader.Instance.player.coyoteTime;
 
             //Set Character Bounds close to sprite size  ~ 1 unity unit * scale
-            float extentX = 0.5f /** JsonReader.Instance.player.scale[0]*/;
+            float extentX = 0.4f /** JsonReader.Instance.player.scale[0]*/; //0.4 so player can fall with 1 unit gap
             float extentY = 0.5f /** JsonReader.Instance.player.scale[1]*/;
             //Debug.Log(extentX + " " + extentY);
             _characterBounds.extents = new Vector3(extentX, extentY, 0);
