@@ -16,6 +16,8 @@ public class JsonReader : MonoBehaviour
     public Stages stages;
     public Texture2D[] maps;
     public Dictionary<int[], ElemDico> dicoMapping;
+    public List<Sprite[]> pSheets;
+
 
     void Awake()
     {
@@ -28,7 +30,7 @@ public class JsonReader : MonoBehaviour
         //Process Json
         //player
         GameManager.SetInfos();
-        List<Sprite[]> pSheets = new List<Sprite[]>();
+        pSheets = new List<Sprite[]>();
 
         // only 1 src -> use info to extract all the sheets
         if(player.src.Length == 1)
