@@ -60,27 +60,6 @@
 			"animDelay": 0.1,
 			"sound": "Sounds/Coin",
 			"volume": [0.5]
-		},
-		{
-			"nom" : "foe",
-			"rvb" : [255, 0, 0],
-			"src" : ["Sprites/Foes/foe"],
-			"dim" : [32, 32],
-			"type": "foe1"
-		},
-		{
-			"nom" : "foe2",
-			"rvb" : [220, 90, 90],
-			"src" : ["Sprites/Foes/foe2"],
-			"dim" : [32, 32],
-			"type": "foe2"
-		},
-		{
-			"nom" : "foe3",
-			"rvb" : [200, 0, 0],
-			"src" : ["Sprites/Foes/foe3"],
-			"dim" : [32, 32],
-			"type": "foe3"
 		}
 	]
 }

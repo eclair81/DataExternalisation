@@ -195,18 +195,6 @@ public class LevelGenerator : MonoBehaviour
 
                         return;
 
-                    case "foe1":
-                        //things to do
-                        return;
-
-                    case "foe2":
-                        //things to do
-                        return;
-
-                    case "foe3":
-                        //things to do
-                        return;
-
                     default:
                         Debug.Log("Incorrect type (" + entry.Value.type +") for [" + entry.Key[0] + ", " + entry.Key[1] + ", " + entry.Key[2] + "]");
                         return;
