@@ -28,6 +28,55 @@ public class JsonReader : MonoBehaviour
         //Process Json
         //player
         GameManager.SetInfos();
+        List<Sprite[]> pSheets = new List<Sprite[]>();
+
+        // only 1 src -> use info to extract all the sheets
+        if(player.src.Length == 1)
+        {
+            Texture2D texture;
+            try {
+                texture = duplicateTexture(Resources.Load<Texture2D>(player.src[0]));
+                texture.name = player.src[0];
+
+                for(int i = 0; i < 5; i++)
+                {
+                    Sprite[] sheet = SpriteSheetCreator.ExtractSpriteSheet(texture, player.dim[0], player.dim[1], player.info[i*3], player.info[i*3 + 1], player.info[i*3 + 2]);
+                    pSheets.Add(sheet);
+                } 
+
+            } catch {
+                //Debug.Log("There is no texture for " + player.src[0]);
+                //Add empty spritesheets
+                for(int i = 0; i < 5; i++)
+                {
+                    pSheets.Add(new Sprite[0]);
+                }
+            }
+        }
+        // one sheet for each animation
+        if(player.src.Length == 5)
+        {
+            foreach (string str in player.src)
+            {
+                Texture2D texture;
+                try {
+                    texture = duplicateTexture(Resources.Load<Texture2D>(str));
+                    texture.name = str;
+                } catch {
+                    //Debug.Log("There is no texture for " + str);
+                    //Add empty spritesheet
+                    pSheets.Add(new Sprite[0]);
+                    //skip to next
+                    continue;
+                }
+
+                Sprite[] sheet = SpriteSheetCreator.CreateSpriteSheet(texture, player.dim[0], player.dim[1]);
+                pSheets.Add(sheet);
+            }
+        }
+
+        
+
 
         //maps
         maps = new Texture2D[stages.stageList.Length];
@@ -48,13 +97,31 @@ public class JsonReader : MonoBehaviour
             {
                 //Texture2D[] textures = new Texture2D[elem.src.Length];
                 List<Sprite[]> allSprites = new List<Sprite[]>();
-                for(int i = 0; i < elem.src.Length; i++)
+                foreach(string str in elem.src)
                 {
 
                     Texture2D texture;
                     try {
-                        texture = duplicateTexture(Resources.Load<Texture2D>(elem.src[i]));
-                        texture.name = elem.src[i];
+                        texture = duplicateTexture(Resources.Load<Texture2D>(str));
+                        texture.name = str;
+
+                        Sprite[] sheet;
+                        if(elem.info != null)
+                        {
+                            for(int i = 0; i < (elem.info.Length / 3); i++)
+                            {
+                                //Debug.Log("Starting Extraction");
+                                sheet = SpriteSheetCreator.ExtractSpriteSheet(texture, elem.dim[0], elem.dim[1], elem.info[i*3], elem.info[i*3 + 1], elem.info[i*3 + 2]);
+                                //Debug.Log("Ending Extraction, number of sprites in sheet: " + sheet.Length);
+                                allSprites.Add(sheet);
+                            }
+                        }
+                        else
+                        {
+                            //Debug.Log("Trying to transform a full texture (" + elem.src[i] +") in sprite[] of " + elem.dim[0] + " * " + elem.dim[1] + " pixels...");
+                            sheet = SpriteSheetCreator.CreateSpriteSheet(texture, elem.dim[0], elem.dim[1]);
+                            allSprites.Add(sheet);
+                        }
                     } catch {
                         //Debug.Log("There is no texture for " + elem.src[i]);
                         //Add empty spritesheet
@@ -62,30 +129,6 @@ public class JsonReader : MonoBehaviour
                         //skip to next
                         continue;
                     }
-
-                    Sprite[] sheet;
-                    /*
-                    string res = "[";
-                    foreach (int nb in elem.info)
-                    {
-                        res += nb.ToString() + ", ";
-                    }
-                    res += "]";
-                    Debug.Log(elem.nom + " a pour info: " + res);
-                    */
-                    if(elem.info != null)
-                    {
-                        //Debug.Log("Starting Extraction");
-                        sheet = SpriteSheetCreator.ExtractSpriteSheet(texture, elem.dim[0], elem.dim[1], elem.info[i*3], elem.info[i*3 + 1], elem.info[i*3 + 2]);
-                        //Debug.Log("Ending Extraction, number of sprites in sheet: " + sheet.Length);
-                    }
-                    else
-                    {
-                        //Debug.Log("Trying to transform a full texture (" + elem.src[i] +") in sprite[] of " + elem.dim[0] + " * " + elem.dim[1] + " pixels...");
-                        sheet = SpriteSheetCreator.CreateSpriteSheet(texture, elem.dim[0], elem.dim[1]);
-                    }
-
-                    allSprites.Add(sheet);
                 }
 
                 // Audio
@@ -98,8 +141,6 @@ public class JsonReader : MonoBehaviour
                         audio = Resources.Load<AudioClip>(elem.sound);
                     } catch {
                         //Debug.Log("There is no audio for " + elem.sound);
-                        //Add empty spritesheet
-                        allSprites.Add(new Sprite[0]);
                     }*/
                 }
 
