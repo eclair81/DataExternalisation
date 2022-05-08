@@ -8,12 +8,12 @@ public class Bloc : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     
-    public void Go(List<Sprite[]> list)
+    public void Go(List<Sprite[]> list, int sheetNumber, int spriteNumber)
     {
         sheets = list;
         spriteRenderer = GetComponent<SpriteRenderer>();
         //Test with just the first sprite for now
-        Sprite sprite = sheets[0][0];
+        Sprite sprite = sheets[sheetNumber][spriteNumber];
         spriteRenderer.sprite = sprite;
 
         //Add boxCollider

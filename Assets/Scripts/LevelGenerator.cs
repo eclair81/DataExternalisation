@@ -89,7 +89,7 @@ public class LevelGenerator : MonoBehaviour
                     case "bloc":
                         GameObject bloc = Instantiate(blocPrefab, new Vector2(x, y), Quaternion.identity, parent);
                         Bloc blocScript = bloc.GetComponent<Bloc>();
-                        blocScript.Go(entry.Value.sheets);
+                        blocScript.Go(entry.Value.sheets, 0, 0);
                         
                         return;
 
