@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TarodevController;
+using UnityEngine.SceneManagement;
 
 public static class GameManager : object
 {
@@ -18,6 +19,7 @@ public static class GameManager : object
     {
         livesLeft = JsonReader.Instance.player.life;
         coinForExtraLife = JsonReader.Instance.player.coinForLife;
+        currentStage = 0;
     }
 
     public static void GainCoin()
@@ -44,7 +46,8 @@ public static class GameManager : object
         livesLeft--; // lose a live since this function is only called when the player dies.
         if(livesLeft == 0)
         {
-            Debug.Log("dead");
+            //Debug.Log("dead");
+            SceneManager.LoadScene("Menu", LoadSceneMode.Single);
         }
         return playerSavedPos;
     }
@@ -54,11 +57,12 @@ public static class GameManager : object
         currentStage++;
         if(currentStage == JsonReader.Instance.maps.Length)
         {
-            Debug.Log("gégé, c gagné!!");
+            //Debug.Log("gégé, c gagné!!");
+            SceneManager.LoadScene("Fin", LoadSceneMode.Single);
             return;
         }
 
-        Debug.Log("Loading next level...");
+        //Debug.Log("Loading next level...");
         LevelGenerator.Instance.GenerateLevel(JsonReader.Instance.maps[currentStage]);
     }
 
