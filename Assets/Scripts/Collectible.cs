@@ -18,7 +18,7 @@ public class Collectible : MonoBehaviour
 
     private AudioSource audioSource;
 
-    public void Go(List<Sprite[]> list, float[] scale, float delay, AudioClip sound)
+    public void Go(List<Sprite[]> list, float[] scale, float delay, AudioClip sound, float volume)
     {
         timeBeforeNextFrame = delay;
         //Debug.Log("delayAnim: " + timeBeforeNextFrame);
@@ -34,6 +34,7 @@ public class Collectible : MonoBehaviour
 
         //Add AudioSource
         audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.volume = volume;
         audioSource.clip = sound;
 
         //Scalling

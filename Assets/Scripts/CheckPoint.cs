@@ -15,7 +15,7 @@ public class CheckPoint : MonoBehaviour
 
     private AudioSource audioSource;
 
-    public void Go(List<Sprite[]> list, float[] scale, float delay, AudioClip sound)
+    public void Go(List<Sprite[]> list, float[] scale, float delay, AudioClip sound, float volume)
     {
         timeBeforeNextFrame = delay;
         sheets = list;
@@ -30,6 +30,7 @@ public class CheckPoint : MonoBehaviour
 
         //Add AudioSource
         audioSource = gameObject.AddComponent<AudioSource>();
+        audioSource.volume = volume;
         audioSource.clip = sound;
 
         //Scalling

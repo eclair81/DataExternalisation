@@ -390,6 +390,13 @@ namespace TarodevController {
             life = gameObject.AddComponent<AudioSource>();
             life.clip = JsonReader.Instance.lifeSound;
 
+            if(JsonReader.Instance.player.volume != null)
+            {
+                life.volume = JsonReader.Instance.player.volume[0];
+                death.volume = JsonReader.Instance.player.volume[1];
+            }
+            
+
             //SpriteRenderer
             spriteSheets = JsonReader.Instance.pSheets;
             timeBeforeNextFrame = JsonReader.Instance.player.animDelay;
