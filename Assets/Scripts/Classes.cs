@@ -15,6 +15,8 @@ public class Player
     public int[] dim;
     public int[] info; // only required if there are multiple sheets to extract from a single set
     public float animDelay;
+    public string extraLifeSound;
+    public string deathSound;
 }
 
 
