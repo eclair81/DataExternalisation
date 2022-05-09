@@ -9,6 +9,13 @@ swap them with others without needing to recompile the project.
 My project is a platformer. Each level is represented by a png and each pixel 
 (except for the transparent ones) corresponds to an element.
 
+## How to Play
+Mouse left click to interact with the menu's buttons
+q/d or left/right arrows for horizontal movements
+Spacebar to jump (jumps higher if you hold it down)
+
+
+
 ## Data
 - Player.json
     - life (base number of lives)
