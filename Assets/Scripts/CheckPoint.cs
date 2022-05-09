@@ -7,11 +7,12 @@ public class CheckPoint : MonoBehaviour
     private List<Sprite[]> sheets;
     private SpriteRenderer spriteRenderer;
 
-    private bool animStarted = false;
+    private bool flagChecked = false;
     private float timeBeforeNextFrame;
     private float timerAnim = 0f;
     
     private int currentFrame = 0;
+    private int currentSheet = 0;
 
     private AudioSource audioSource;
 
@@ -21,7 +22,7 @@ public class CheckPoint : MonoBehaviour
         sheets = list;
         
         spriteRenderer = GetComponent<SpriteRenderer>();
-        Sprite sprite = sheets[0][currentFrame];
+        Sprite sprite = sheets[currentSheet][currentFrame];
         spriteRenderer.sprite = sprite;
 
         //Add boxCollider
@@ -40,11 +41,6 @@ public class CheckPoint : MonoBehaviour
 
     void Update()
     {
-        if(!animStarted)
-        {
-            return;
-        }
-
         timerAnim += Time.deltaTime;
         if(timerAnim >= timeBeforeNextFrame)
         {
@@ -55,13 +51,8 @@ public class CheckPoint : MonoBehaviour
 
     private void NextFrame()
     {
-        currentFrame++;
-        if(currentFrame == 13)
-        {
-            // goes back to 1, because first sprite is unlighted torch
-            currentFrame = 1;
-        }
-        spriteRenderer.sprite = sheets[0][currentFrame];
+        currentFrame = (currentFrame + 1) % sheets[currentSheet].Length;
+        spriteRenderer.sprite = sheets[currentSheet][currentFrame];
     }
 
     private void changeLocalScale(float[] scale)
@@ -72,7 +63,7 @@ public class CheckPoint : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         //Only useable once
-        if(!animStarted)
+        if(!flagChecked)
         {
             if(other.tag == "Player")
             {
@@ -80,7 +71,8 @@ public class CheckPoint : MonoBehaviour
                 audioSource.Play();
 
                 // Start anim torch
-                animStarted = true;
+                flagChecked = true;
+                currentSheet = 1;
             }
         }
     }
