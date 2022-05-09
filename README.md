@@ -9,11 +9,6 @@ swap them with others without needing to recompile the project.
 My project is a platformer. Each level is represented by a png and each pixel 
 (except for the transparent ones) is corresponding to an element.
 
-## Screenshot
-
-![App Screenshot](https://ibb.co/PFKprkd)
-
-
 ## Data
 - Player.json
     - life (base number of lives)
@@ -46,11 +41,10 @@ My project is a platformer. Each level is represented by a png and each pixel
         - sound (path to the audio to play when interacting with that element. Not for "bloc" / "spawnPoint" / "endPoint"type)
         - volume ( [0f-1f] volume for the "sound" entry. 0 is mute and 1 is max volume. if you delete this entry, base volume is 1)
 
-## Add a new stage
-Add new PNGs inside the StreamingAssets folder and update Stages.json accordingly.
-
-## Edit Sheets
-Add your custom sheets inside the StreamingAssets folder and update Player/Stages.json accordingly.
+## Add a new stage, change the look
+Add new PNGs inside the StreamingAssets folder and update Stages.json accordingly to add your custom stages.
+Add your custom sheets inside the StreamingAssets folder and update Player/Stages.json accordingly to change the look of the game.
+Create new elements inside of colorMapping to add more variety to your stages.
 
 ## Acknowledgements
 
