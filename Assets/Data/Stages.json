@@ -1,0 +1,65 @@
+
+{
+	"stageList":
+	[
+		"Stages/stage1",
+		"Stages/stage3",
+		"Stages/stage2"
+	],
+
+	"colorFidelity": 10,
+
+	"colorMapping":
+	[
+		{
+			"nom" : "start",
+			"rvb" : [0, 0, 0],
+			"type": "spawnPoint"
+		},
+		{
+			"nom" : "flag",
+			"rvb" : [204, 204, 204],
+			"src" : ["Sprites/Tiles/tiki_torch_props_strip_13"],
+			"dim" : [8, 24],
+			"scale":[1, 1],
+			"type": "checkPoint",
+			"animDelay": 0.1,
+			"sound": "Sounds/Torch"
+		},
+		{
+			"nom" : "end",
+			"rvb" : [102, 102, 102],
+			"src" : ["Sprites/Tiles/door"],
+			"dim" : [24, 24],
+			"scale":[1, 1],
+			"type": "endPoint"
+		},
+		{
+			"nom" : "grass",
+			"rvb" : [0, 204, 0],
+			"src" : ["Sprites/Tiles/tileset_32x32(new)"],
+			"info": [0, 0, 3, 0, 1, 3, 0, 2, 3],
+			"dim" : [32, 32],
+			"type": "bloc"
+		},
+		{
+			"nom" : "dirt",
+			"rvb" : [255, 128, 0],
+			"src" : ["Sprites/Tiles/tileset_32x32(new)"],
+			"info": [0, 3, 3, 0, 4, 3, 0, 5, 3],
+			"dim" : [32, 32],
+			"type": "bloc"
+		},
+		{
+			"nom" : "coin",
+			"rvb" : [255, 235, 4],
+			"src" : ["Sprites/Tiles/coin_anim_strip_6", "Sprites/Tiles/coin_pickup_anim_strip_5"],
+			"dim" : [8, 8],
+			"scale":[0.5, 0.5],
+			"type": "collectible",
+			"animDelay": 0.1,
+			"sound": "Sounds/Coin",
+			"volume": [0.5]
+		}
+	]
+}
