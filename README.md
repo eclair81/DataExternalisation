@@ -41,6 +41,16 @@ My project is a platformer. Each level is represented by a png and each pixel
         - sound (path to the audio to play when interacting with that element. Not for "bloc" / "spawnPoint" / "endPoint"type)
         - volume ( [0f-1f] volume for the "sound" entry. 0 is mute and 1 is max volume. if you delete this entry, base volume is 1)
 
+## Description of Some Useful Scripts
+- JsonReader
+    - Gets the data contained inside Data/Player.json and Data/Stages.json. Reconstructs a dictionnary (dicoMapping) from the colorMapping.
+- Classes
+    - Mirror classes of the data structures inside the jsons.
+- LevelGenerator
+    - Iterate over every pixels of a given Texture2D and compare their color to the Elements of dicoMapping. If there is a match, instantiate, at this pixel coordinates, a prefab corresponding to the matched element type.
+- SpriteSheetCreator
+    - Transform a Texture2D into an array of sprites. That's what allows to creates spritesheets at runtime.
+
 ## Add a new stage, change the look
 Add new PNGs inside the StreamingAssets folder and update Stages.json accordingly to add your custom stages.
 Add your custom sheets inside the StreamingAssets folder and update Player/Stages.json accordingly to change the look of the game.
