@@ -7,7 +7,7 @@ The objective is to externalise the data of an application to allow an end-user 
 swap them with others without needing to recompile the project.
 
 My project is a platformer. Each level is represented by a png and each pixel 
-(except for the transparent ones) is corresponding to an element.
+(except for the transparent ones) corresponds to an element.
 
 ## Data
 - Player.json
