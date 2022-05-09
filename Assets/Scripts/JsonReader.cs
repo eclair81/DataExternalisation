@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using UnityEngine.Networking;
 
 public class JsonReader : MonoBehaviour
 {
@@ -20,15 +22,21 @@ public class JsonReader : MonoBehaviour
     public AudioClip deathSound;
     public AudioClip lifeSound;
 
+    private AudioClip lastClip;
 
     void Awake()
     {
         Instance = this;
 
         //Read Json
-        player = JsonUtility.FromJson<Player>(playerJson.text);
-        stages = JsonUtility.FromJson<Stages>(stagesJson.text);
+        //player = JsonUtility.FromJson<Player>(playerJson.text);
+        //stages = JsonUtility.FromJson<Stages>(stagesJson.text);
 
+        //Read Json from StreamingAssets
+        player = JsonUtility.FromJson<Player>(File.ReadAllText(Application.streamingAssetsPath + "/Data/Player.json"));
+        stages = JsonUtility.FromJson<Stages>(File.ReadAllText(Application.streamingAssetsPath + "/Data/Stages.json"));
+
+        #region player
         //Process Json
         //player
         GameManager.SetInfos();
@@ -39,7 +47,8 @@ public class JsonReader : MonoBehaviour
         {
             Texture2D texture;
             try {
-                texture = duplicateTexture(Resources.Load<Texture2D>(player.src[0]));
+                //texture = duplicateTexture(Resources.Load<Texture2D>(player.src[0]));
+                texture = ReadTexture2D(player.src[0]);
                 texture.name = player.src[0];
 
                 for(int i = 0; i < 5; i++)
@@ -64,7 +73,8 @@ public class JsonReader : MonoBehaviour
             {
                 Texture2D texture;
                 try {
-                    texture = duplicateTexture(Resources.Load<Texture2D>(str));
+                    //texture = duplicateTexture(Resources.Load<Texture2D>(str));
+                    texture = ReadTexture2D(str);
                     texture.name = str;
                 } catch {
                     //Debug.Log("There is no texture for " + str);
@@ -83,24 +93,31 @@ public class JsonReader : MonoBehaviour
         if(player.extraLifeSound != null)
         {
             lifeSound = Resources.Load<AudioClip>(player.extraLifeSound);
+            //StartCoroutine(ReadAudioClip(player.extraLifeSound));
+            //lifeSound = lastClip;
         }
 
         deathSound = null;
         if(player.deathSound != null)
         {
             deathSound = Resources.Load<AudioClip>(player.deathSound);
+            //StartCoroutine(ReadAudioClip(player.deathSound));
+            //deathSound = lastClip;
         }
+        #endregion
 
-
+        #region map
         //maps
         maps = new Texture2D[stages.stageList.Length];
         for(int i = 0; i < maps.Length; i++)
         {
-            Texture2D map = duplicateTexture(Resources.Load<Texture2D>(stages.stageList[i]));
-            map.filterMode = FilterMode.Point;
+            //Texture2D map = duplicateTexture(Resources.Load<Texture2D>(stages.stageList[i]));
+            Texture2D map = ReadTexture2D(stages.stageList[i]);
             maps[i] = map;
         }
+        #endregion
 
+        #region dico
         // Creating dictionary
         dicoMapping = new Dictionary<int[], ElemDico>();
         foreach (Elem elem in stages.colorMapping)
@@ -116,7 +133,8 @@ public class JsonReader : MonoBehaviour
 
                     Texture2D texture;
                     try {
-                        texture = duplicateTexture(Resources.Load<Texture2D>(str));
+                        //texture = duplicateTexture(Resources.Load<Texture2D>(str));
+                        texture = ReadTexture2D(str);
                         texture.name = str;
 
                         Sprite[] sheet;
@@ -150,6 +168,8 @@ public class JsonReader : MonoBehaviour
                 if(elem.sound != null)
                 {
                     audio = Resources.Load<AudioClip>(elem.sound);
+                    //StartCoroutine(ReadAudioClip(elem.sound));
+                    //audio = lastClip;
                 }
                 float volume = 1f;
                 if(elem.volume != null)
@@ -166,6 +186,8 @@ public class JsonReader : MonoBehaviour
                 if(elem.sound != null)
                 {
                     audio = Resources.Load<AudioClip>(elem.sound);
+                    //StartCoroutine(ReadAudioClip(elem.sound));
+                    //audio = lastClip;
                 }
                 float volume = 1f;
                 if(elem.volume != null)
@@ -178,8 +200,92 @@ public class JsonReader : MonoBehaviour
                 dicoMapping.Add(elem.rvb, elemDico);
             }
         }
+        #endregion
     }
 
+    private Texture2D ReadTexture2D(string path)
+    {
+        string url = Application.streamingAssetsPath + "/" + path;
+        //Debug.Log("path: " + url);
+        byte[] imgData = File.ReadAllBytes(url);
+        Texture2D texture = new Texture2D(2, 2);
+        //texture.filterMode = FilterMode.Point;
+        texture.LoadImage(imgData);
+        //Debug.Log("width: " + texture.width + " height: " + texture.height);
+        return texture;
+    }
+
+    /*private AudioClip ReadAudioClip(string path)
+    {
+        string url = Application.streamingAssetsPath + "/" + path;
+        //Debug.Log("path: " + url);
+
+        WWW www = new WWW(url);
+        AudioClip audioClip = www.GetAudioClip(false,false);
+
+        /*
+        byte[] clipData = File.ReadAllBytes(url);
+
+        // Load the data into a stream
+        MemoryStream mp3Stream = new MemoryStream(clipData);
+        // Convert the data in the stream to WAV format
+        Mp3FileReader mp3Audio = new Mp3FileReader(mp3Stream);
+        WaveStream waveStream = WaveFormatConversionStream.CreatePcmStream(mp3Audio);
+        // Convert to WAV data
+        WAV wav = new WAV(audioMemStream(waveStream).ToArray());
+
+        int channels = wav.ChannelCount;
+        AudioClip audioClip = AudioClip.Create("testSound", wav.SampleCount, channels, wav.Frequency, false);
+        
+        return audioClip;
+    }*/
+
+    private IEnumerator ReadAudioClip(string path)
+    {
+        string url = Application.streamingAssetsPath + "/" + path;
+        WWW request = new WWW(url);
+
+        yield return request;
+
+        lastClip = request.GetAudioClip();
+        lastClip.name = path;
+
+        /*string url = Application.streamingAssetsPath + "/" + path;
+        Debug.Log(url);
+        
+        using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(path, AudioType.UNKNOWN))
+        {
+            yield return www.SendWebRequest();
+            if (www.isNetworkError)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                AudioClip myClip = DownloadHandlerAudioClip.GetContent(www);
+                //audioSource.clip = myClip;
+                //audioSource.Play();
+            }
+        }*/
+
+/*
+        using (UnityWebRequest www = UnityWebRequestMultimedia.GetAudioClip(url, AudioType.UNKNOWN))
+        {
+            www.SendWebRequest();
+            if (www.result == UnityWebRequest.Result.ConnectionError)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                AudioClip clip = DownloadHandlerAudioClip.GetContent(www);
+                yield return clip;
+                //lastClip = DownloadHandlerAudioClip.GetContent(www);
+                //Debug.Log("lastClip is set");
+            }
+        }*/
+
+    }
 
     // Create a copy of the source texture
     // Necessary because by default an imported Texture isn't readable (need to change that in the inspector)
