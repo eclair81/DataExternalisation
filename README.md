@@ -50,7 +50,7 @@ Spacebar to jump (jumps higher if you hold it down)
 
 ## Description of Some Useful Scripts
 - JsonReader
-    - Gets the data contained inside Data/Player.json and Data/Stages.json. Reconstructs a dictionnary (dicoMapping) from the colorMapping.
+    - Gets the data contained inside StreamingAssets/Data/Player.json and StreamingAssets/Data/Stages.json. Reconstructs a dictionnary (dicoMapping) from the colorMapping.
 - Classes
     - Mirror classes of the data structures inside the jsons.
 - LevelGenerator
@@ -62,6 +62,7 @@ Spacebar to jump (jumps higher if you hold it down)
 Add new PNGs inside the StreamingAssets folder and update Stages.json accordingly to add your custom stages.
 Add your custom sheets inside the StreamingAssets folder and update Player/Stages.json accordingly to change the look of the game.
 Create new elements inside of colorMapping to add more variety to your stages.
+(if you add something, be careful to put it inside the StreamingAssets folder and NOT the Resources folder)
 
 ## Acknowledgements
 
