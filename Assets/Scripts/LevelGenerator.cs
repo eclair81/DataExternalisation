@@ -87,7 +87,7 @@ public class LevelGenerator : MonoBehaviour
                         return;
 
                     case "bloc":
-                        Debug.Log("spawn bloc at " + x + " " + y);
+                        //Debug.Log("spawn bloc at " + x + " " + y);
                         GameObject bloc = Instantiate(blocPrefab, new Vector2(x, y), Quaternion.identity, parent);
                         Bloc blocScript = bloc.GetComponent<Bloc>();
 
@@ -182,7 +182,7 @@ public class LevelGenerator : MonoBehaviour
 
 
                         int[] res = WhichSprite(up, down, left, right);
-                        Debug.Log(x + ", " + y + "has sprite: " + res[0] + ", " + res[1] + "\n neighbors: up: " + up.ToString() + " down: " + down.ToString() + "  left: " + left.ToString() + "  right: " + right.ToString());
+                        //Debug.Log(x + ", " + y + "has sprite: " + res[0] + ", " + res[1] + "\n neighbors: up: " + up.ToString() + " down: " + down.ToString() + "  left: " + left.ToString() + "  right: " + right.ToString());
 
                         blocScript.Go(entry.Value.sheets, res[0], res[1]);
                         
